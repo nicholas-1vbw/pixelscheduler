@@ -1,0 +1,8 @@
+{
+  "track_id": "ui_enhancements_20260212",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-02-12T10:00:00Z",
+  "updated_at": "2026-02-12T10:00:00Z",
+  "description": "Improve current UI by adding a time indicator on the bar and popup event info on hover."
+}
