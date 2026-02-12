@@ -13,6 +13,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let calendarManager = CalendarManager()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Skip initialization logic if we are running in a testing environment
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+            return
+        }
+
         statusBarController = StatusBarController()
         
         Task {
