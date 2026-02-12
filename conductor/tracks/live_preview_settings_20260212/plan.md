@@ -5,11 +5,11 @@ This plan outlines the steps to implement real-time previewing of settings on th
 ## Phase 1: State Management Refactoring
 Goal: Separate persistent settings from the active "session" settings to support real-time preview and restoration.
 
-- [x] Task: Update `SettingsManager` to support a "draft" or "session" state. 35b9a9d
-    - [x] Task: Implement a mechanism to capture a snapshot of current settings. 35b9a9d
-    - [x] Task: Add a `revert()` method to restore settings from a snapshot. 35b9a9d
-    - [x] Task: Ensure `UserDefaults` is only updated when an explicit `save()` is called. 35b9a9d
-- [x] Task: Update `SettingsViewModel` to observe and publish changes to the "session" state. 35b9a9d
+- [x] Task: Update `SettingsManager` to support a "draft" or "session" state. bf27edb
+    - [x] Task: Implement a mechanism to capture a snapshot of current settings. bf27edb
+    - [x] Task: Add a `revert()` method to restore settings from a snapshot. bf27edb
+    - [x] Task: Ensure `UserDefaults` is only updated when an explicit `save()` is called. bf27edb
+- [x] Task: Update `SettingsViewModel` to observe and publish changes to the "session" state. bf27edb
 - [x] Task: Conductor - User Manual Verification 'Phase 1: State Management' (Protocol in workflow.md)
 
 ## Phase 2: LivePreview Integration
