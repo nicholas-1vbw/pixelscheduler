@@ -3,9 +3,9 @@
 This plan outlines the steps to implement the core "Timer Beam" window and basic calendar event fetching for PixelScheduler.
 
 ## Phase 1: Foundation & Permissions
-- [ ] Task: Project Initialization & Status Bar Setup
-    - [ ] Write unit tests to verify app delegate / lifecycle initialization and status item creation.
-    - [ ] Implement the status bar icon and basic menu (Exit, Manual Refresh).
+- [x] Task: Project Initialization & Status Bar Setup [commit: 201753c]
+    - [x] Write unit tests to verify app delegate / lifecycle initialization and status item creation.
+    - [x] Implement the status bar icon and basic menu (Exit, Manual Refresh).
 - [ ] Task: Calendar Access & Permissions
     - [ ] Update `Info.plist` with `NSCalendarsUsageDescription`.
     - [ ] Write unit tests to verify the permission handling logic (mocking `EKEventStore`).
