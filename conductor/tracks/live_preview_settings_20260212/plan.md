@@ -33,6 +33,6 @@ Goal: Implement the UI and lifecycle events for persisting or discarding changes
 ## Phase 4: Final Polishing & Edge Cases
 Goal: Ensure a smooth user experience and handle edge cases.
 
-- [ ] Task: Audit `AppDelegate` and `PixelSchedulerApp` for proper initialization/teardown of the settings session.
-- [ ] Task: Verify multi-display behavior (if applicable) during live preview.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Final Polishing' (Protocol in workflow.md)
+- [x] Task: Audit `AppDelegate` and `PixelSchedulerApp` for proper initialization/teardown of the settings session. f250332
+- [x] Task: Verify multi-display behavior (if applicable) during live preview. f250332
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Final Polishing' (Protocol in workflow.md)
