@@ -6,28 +6,37 @@
 //
 
 import AppKit
+import SwiftUI
 
 class BeamWindow: NSPanel {
-    init() {
+    init(events: [TimelineEvent] = [], position: BeamPosition = .top) {
         super.init(
-            contentRect: NSRect(x: 0, y: 0, width: 800, height: 20), // More height for visibility
+            contentRect: NSRect(x: 0, y: 0, width: 800, height: 20),
             styleMask: [.nonactivatingPanel, .borderless],
             backing: .buffered,
             defer: false
         )
         
         self.isOpaque = false
-        self.backgroundColor = NSColor.red.withAlphaComponent(0.5) // Semi-transparent red
+        self.backgroundColor = .clear // Back to clear, child view will provide color
         self.level = .statusBar
         self.ignoresMouseEvents = true
         self.collectionBehavior = [.canJoinAllSpaces, .stationary]
         self.hasShadow = false
         
-        // Initial positioning at the top of the main screen
-        if let mainScreen = NSScreen.main {
-            self.setFrame(FrameCalculator.calculateFrame(for: .top, thickness: 20, screen: mainScreen), display: true)
-        }
-        
+        update(events: events, position: position)
         self.orderFrontRegardless()
+    }
+    
+    func update(events: [TimelineEvent], position: BeamPosition) {
+        let beamView = BeamView(events: events, position: position)
+        let hostingView = NSHostingView(rootView: beamView)
+        hostingView.frame = self.contentView?.bounds ?? .zero
+        self.contentView = hostingView
+        
+        if let mainScreen = NSScreen.main {
+            let frame = FrameCalculator.calculateFrame(for: position, thickness: 10, screen: mainScreen)
+            self.setFrame(frame, display: true)
+        }
     }
 }

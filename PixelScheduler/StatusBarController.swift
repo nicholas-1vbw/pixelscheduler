@@ -9,8 +9,10 @@ import AppKit
 
 class StatusBarController: NSObject {
     var statusItem: NSStatusItem!
+    private let calendarManager: CalendarManager
     
-    override init() {
+    init(calendarManager: CalendarManager) {
+        self.calendarManager = calendarManager
         super.init()
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
@@ -37,7 +39,7 @@ class StatusBarController: NSObject {
     }
     
     @objc func refresh() {
-        // Todo: Implement refresh logic
+        calendarManager.fetchEvents()
     }
     
     @objc func exitApp() {

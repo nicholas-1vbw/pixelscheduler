@@ -9,17 +9,18 @@ import Testing
 import AppKit
 @testable import PixelScheduler
 
+@MainActor
 struct StatusBarTests {
 
     @Test func testStatusBarControllerInitialization() async throws {
-        // This test expects a StatusBarController class to exist.
-        // It should initialize an NSStatusItem.
-        let controller = StatusBarController()
+        let manager = CalendarManager()
+        let controller = StatusBarController(calendarManager: manager)
         #expect(controller.statusItem != nil)
     }
 
     @Test func testStatusItemHasMenu() async throws {
-        let controller = StatusBarController()
+        let manager = CalendarManager()
+        let controller = StatusBarController(calendarManager: manager)
         #expect(controller.statusItem.menu != nil)
     }
 }
