@@ -6,10 +6,10 @@ This plan outlines the steps to implement the core "Timer Beam" window and basic
 - [x] Task: Project Initialization & Status Bar Setup [commit: 201753c]
     - [x] Write unit tests to verify app delegate / lifecycle initialization and status item creation.
     - [x] Implement the status bar icon and basic menu (Exit, Manual Refresh).
-- [ ] Task: Calendar Access & Permissions
-    - [ ] Update `Info.plist` with `NSCalendarsUsageDescription`.
-    - [ ] Write unit tests to verify the permission handling logic (mocking `EKEventStore`).
-    - [ ] Implement the `CalendarManager` to request access and handle the authorization status.
+- [x] Task: Calendar Access & Permissions [commit: 8d2f82f]
+    - [x] Update `Info.plist` with `NSCalendarsUsageDescription`.
+    - [x] Write unit tests to verify the permission handling logic (mocking `EKEventStore`).
+    - [x] Implement the `CalendarManager` to request access and handle the authorization status.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Permissions' (Protocol in workflow.md)
 
 ## Phase 2: Data Fetching Layer
