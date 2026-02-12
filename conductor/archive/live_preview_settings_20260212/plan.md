@@ -1,0 +1,38 @@
+# Implementation Plan: LivePreview for Settings
+
+This plan outlines the steps to implement real-time previewing of settings on the actual Timer Beam, with explicit Save/Cancel persistence logic.
+
+## Phase 1: State Management Refactoring
+Goal: Separate persistent settings from the active "session" settings to support real-time preview and restoration.
+
+- [x] Task: Update `SettingsManager` to support a "draft" or "session" state. bf27edb
+    - [x] Task: Implement a mechanism to capture a snapshot of current settings. bf27edb
+    - [x] Task: Add a `revert()` method to restore settings from a snapshot. bf27edb
+    - [x] Task: Ensure `UserDefaults` is only updated when an explicit `save()` is called. bf27edb
+- [x] Task: Update `SettingsViewModel` to observe and publish changes to the "session" state. bf27edb
+- [x] Task: Conductor - User Manual Verification 'Phase 1: State Management' (Protocol in workflow.md)
+
+## Phase 2: LivePreview Integration
+Goal: Connect the `SettingsView` changes directly to the `BeamView` via the updated state management.
+
+- [x] Task: Ensure `BeamView` and `BeamWindow` react immediately to changes in the `SettingsManager` session state. bb5e592
+- [x] Task: Verify that all UI controls in `SettingsView` (colors, position, thickness) trigger a redraw of the `BeamView`. bb5e592
+- [x] Task: Conductor - User Manual Verification 'Phase 2: LivePreview Integration' (Protocol in workflow.md)
+
+## Phase 3: Save/Cancel/Restoration Logic
+Goal: Implement the UI and lifecycle events for persisting or discarding changes.
+
+- [x] Task: Add "Save" and "Cancel" buttons to `SettingsView`. c4f9e95
+    - [x] Task: "Save" button triggers `SettingsManager.save()`. c4f9e95
+    - [x] Task: "Cancel" button triggers `SettingsManager.revert()` and closes the window. c4f9e95
+- [x] Task: Implement window lifecycle hooks to trigger restoration. c4f9e95
+    - [x] Task: Restore settings if the `SettingsView` is closed without saving. c4f9e95
+    - [x] Task: Ensure settings are restored on app termination if unsaved. c4f9e95
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Save/Cancel/Restoration Logic' (Protocol in workflow.md)
+
+## Phase 4: Final Polishing & Edge Cases
+Goal: Ensure a smooth user experience and handle edge cases.
+
+- [x] Task: Audit `AppDelegate` and `PixelSchedulerApp` for proper initialization/teardown of the settings session. f250332
+- [x] Task: Verify multi-display behavior (if applicable) during live preview. f250332
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Final Polishing' (Protocol in workflow.md)
