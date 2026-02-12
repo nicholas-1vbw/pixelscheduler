@@ -113,7 +113,7 @@ class MockEventStore: EventStoreProtocol {
         return NSPredicate(value: true)
     }
 
-    func calendars(for entityType: EKEntityType) -> [EKCalendar] {
+    func getCalendars(for entityType: EKEntityType) -> [EKCalendar] {
         // Return empty for now as EKCalendar/EKSource are hard to mock
         return []
     }

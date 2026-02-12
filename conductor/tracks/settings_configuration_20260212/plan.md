@@ -20,7 +20,7 @@
     - [x] Verify that controls update the draft state in the view.
 - [x] Task: Implement Appearance Controls in `SettingsView` (71702)
 - [x] Task: Add "Save" and "Cancel" buttons with explicit save logic (71702)
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Settings UI - Layout & Appearance Controls' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Settings UI - Layout & Appearance Controls' (Protocol in workflow.md) (77156)
 
 ## Phase 3: Settings UI - Calendar Management
 - [x] Task: Update `CalendarManager` to provide grouped calendar data (73475)
@@ -31,7 +31,7 @@
 - [x] Task: Write Tests for Calendar Selection logic (73475)
     - [x] Verify that group toggle correctly updates all sub-calendars.
 - [x] Task: Implement Calendar Selection in `SettingsView` (73475)
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Settings UI - Calendar Management' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Settings UI - Calendar Management' (Protocol in workflow.md) (77156)
 
 ## Phase 4: Integration & System Behavior
 - [x] Task: Update `StatusBarController` to manage the Settings Window (75335)
@@ -43,4 +43,4 @@
 - [x] Task: Write Integration Tests (75335)
     - [x] Verify that clicking "Save" in Settings triggers a refresh in the Beam UI.
 - [x] Task: Implement Integration Logic (75335)
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Integration & System Behavior' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Integration & System Behavior' (Protocol in workflow.md) (77156)

@@ -38,7 +38,7 @@ class CalendarManager: ObservableObject {
     }
     
     func fetchGroupedCalendars() -> [CalendarGroup] {
-        let calendars = eventStore.calendars(for: .event)
+        let calendars = eventStore.getCalendars(for: .event)
         let grouped = Dictionary(grouping: calendars) { $0.source.title }
         
         return grouped.map { (sourceName, calendars) in
@@ -53,7 +53,7 @@ class CalendarManager: ObservableObject {
         
         let ekCalendars: [EKCalendar]?
         if let ids = calendarIDs, !ids.isEmpty {
-            let allCalendars = eventStore.calendars(for: .event)
+            let allCalendars = eventStore.getCalendars(for: .event)
             ekCalendars = allCalendars.filter { ids.contains($0.calendarIdentifier) }
         } else {
             ekCalendars = nil
@@ -78,7 +78,7 @@ protocol EventStoreProtocol {
     func requestAccess() async throws -> Bool
     func events(matching predicate: NSPredicate) -> [EKEvent]
     func predicateForEvents(withStart start: Date, end: Date, calendars: [EKCalendar]?) -> NSPredicate
-    func calendars(for entityType: EKEntityType) -> [EKCalendar]
+    func getCalendars(for entityType: EKEntityType) -> [EKCalendar]
 }
 
 extension EKEventStore: EventStoreProtocol {
@@ -90,7 +90,7 @@ extension EKEventStore: EventStoreProtocol {
         }
     }
     
-    func calendars(for entityType: EKEntityType) -> [EKCalendar] {
+    func getCalendars(for entityType: EKEntityType) -> [EKCalendar] {
         return self.calendars(for: entityType)
     }
 }

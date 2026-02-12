@@ -47,33 +47,50 @@ class StatusBarController: NSObject {
     }
     
     @objc func openSettings() {
-        if settingsWindow == nil {
-            let viewModel = SettingsViewModel(settingsManager: settingsManager, calendarManager: calendarManager)
-            let settingsView = SettingsView(viewModel: viewModel)
-            let hostingView = NSHostingView(rootView: settingsView)
-            
-            let window = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 400, height: 500),
-                styleMask: [.titled, .closable],
-                backing: .buffered,
-                defer: false
-            )
-            window.center()
-            window.title = "PixelScheduler Preferences"
-            window.contentView = hostingView
-            window.isReleasedWhenClosed = false
-            self.settingsWindow = window
-        }
+        print("DEBUG: openSettings called")
         
-        NSApp.activate(ignoringOtherApps: true)
-        settingsWindow?.makeKeyAndOrderFront(nil)
+        // Ensure UI operations are on MainActor/MainThread
+        Task { @MainActor in
+            print("DEBUG: Executing on MainActor")
+            if self.settingsWindow == nil {
+                print("DEBUG: Creating new settings window")
+                let viewModel = SettingsViewModel(settingsManager: self.settingsManager, calendarManager: self.calendarManager)
+                let settingsView = SettingsView(viewModel: viewModel)
+                let hostingView = NSHostingView(rootView: settingsView)
+                
+                let window = NSWindow(
+                    contentRect: NSRect(x: 0, y: 0, width: 400, height: 500),
+                    styleMask: [.titled, .closable, .miniaturizable],
+                    backing: .buffered,
+                    defer: false
+                )
+                window.center()
+                window.title = "PixelScheduler Preferences"
+                window.contentView = hostingView
+                window.isReleasedWhenClosed = false
+                window.delegate = self
+                self.settingsWindow = window
+                print("DEBUG: Window created")
+            }
+            
+            print("DEBUG: Ordering front and activating")
+            self.settingsWindow?.makeKeyAndOrderFront(nil)
+            NSApp.activate(ignoringOtherApps: true)
+            print("DEBUG: openSettings finished")
+        }
     }
     
     @objc func refresh() {
-        calendarManager.fetchEvents()
+        calendarManager.fetchEvents(calendarIDs: settingsManager.selectedCalendarIDs)
     }
     
     @objc func exitApp() {
         NSApplication.shared.terminate(nil)
+    }
+}
+
+extension StatusBarController: NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        // Just let it hide, it's not released when closed
     }
 }
