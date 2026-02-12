@@ -9,7 +9,7 @@ import AppKit
 import SwiftUI
 
 class BeamWindow: NSPanel {
-    init(events: [TimelineEvent] = [], position: BeamPosition = .top) {
+    init(events: [TimelineEvent] = [], settings: SettingsManager) {
         super.init(
             contentRect: NSRect(x: 0, y: 0, width: 800, height: 20),
             styleMask: [.nonactivatingPanel, .borderless],
@@ -24,18 +24,18 @@ class BeamWindow: NSPanel {
         self.collectionBehavior = [.canJoinAllSpaces, .stationary]
         self.hasShadow = false
         
-        update(events: events, position: position)
+        update(events: events, settings: settings)
         self.orderFrontRegardless()
     }
     
-    func update(events: [TimelineEvent], position: BeamPosition) {
-        let beamView = BeamView(events: events, position: position)
+    func update(events: [TimelineEvent], settings: SettingsManager) {
+        let beamView = BeamView(events: events, settings: settings)
         let hostingView = NSHostingView(rootView: beamView)
         hostingView.frame = self.contentView?.bounds ?? .zero
         self.contentView = hostingView
         
         if let mainScreen = NSScreen.main {
-            let frame = FrameCalculator.calculateFrame(for: position, thickness: 10, screen: mainScreen)
+            let frame = FrameCalculator.calculateFrame(for: settings.beamPosition, thickness: CGFloat(settings.beamThickness), screen: mainScreen)
             self.setFrame(frame, display: true)
         }
     }

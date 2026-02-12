@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarController: StatusBarController?
     var beamWindow: BeamWindow?
     let calendarManager = CalendarManager()
+    let settingsManager = SettingsManager()
     private var cancellables = Set<AnyCancellable>()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -21,8 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        statusBarController = StatusBarController(calendarManager: calendarManager)
-        beamWindow = BeamWindow()
+        statusBarController = StatusBarController(calendarManager: calendarManager, settingsManager: settingsManager)
+        beamWindow = BeamWindow(settings: settingsManager)
         
         setupSubscriptions()
         
@@ -37,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let granted = try await calendarManager.requestAccess()
                 print("Calendar access granted: \(granted)")
                 if granted {
-                    calendarManager.fetchEvents()
+                    calendarManager.fetchEvents(calendarIDs: settingsManager.selectedCalendarIDs)
                 }
             } catch {
                 print("Error requesting calendar access: \(error)")
@@ -49,7 +50,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         calendarManager.$events
             .receive(on: RunLoop.main)
             .sink { [weak self] events in
-                self?.beamWindow?.update(events: events, position: .top)
+                guard let self = self else { return }
+                self.beamWindow?.update(events: events, settings: self.settingsManager)
+            }
+            .store(in: &cancellables)
+            
+        settingsManager.objectWillChange
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.beamWindow?.update(events: self.calendarManager.events, settings: self.settingsManager)
+                    self.calendarManager.fetchEvents(calendarIDs: self.settingsManager.selectedCalendarIDs)
+                }
             }
             .store(in: &cancellables)
     }

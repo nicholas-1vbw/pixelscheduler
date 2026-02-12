@@ -13,7 +13,8 @@ import AppKit
 struct BeamWindowTests {
 
     @Test func testBeamWindowConfiguration() async throws {
-        let window = BeamWindow()
+        let settings = SettingsManager()
+        let window = BeamWindow(settings: settings)
         
         // Transparent
         #expect(window.backgroundColor == .clear)

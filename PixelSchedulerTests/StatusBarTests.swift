@@ -14,13 +14,15 @@ struct StatusBarTests {
 
     @Test func testStatusBarControllerInitialization() async throws {
         let manager = CalendarManager()
-        let controller = StatusBarController(calendarManager: manager)
+        let settings = SettingsManager()
+        let controller = StatusBarController(calendarManager: manager, settingsManager: settings)
         #expect(controller.statusItem != nil)
     }
 
     @Test func testStatusItemHasMenu() async throws {
         let manager = CalendarManager()
-        let controller = StatusBarController(calendarManager: manager)
+        let settings = SettingsManager()
+        let controller = StatusBarController(calendarManager: manager, settingsManager: settings)
         #expect(controller.statusItem.menu != nil)
     }
 }

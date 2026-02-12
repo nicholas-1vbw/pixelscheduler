@@ -34,13 +34,13 @@
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Settings UI - Calendar Management' (Protocol in workflow.md)
 
 ## Phase 4: Integration & System Behavior
-- [ ] Task: Update `StatusBarController` to manage the Settings Window
-    - [ ] Implement `openSettings()` to show the `SettingsView` in a standard `NSWindow`.
-- [ ] Task: Update `CalendarManager` to filter events
-    - [ ] Modify event fetching logic to only include events from `selectedCalendarIDs`.
-- [ ] Task: Update `BeamWindow` and `BeamView` to reflect settings
-    - [ ] Listen for settings changes (or update on Save) to reposition and restyle the beam.
-- [ ] Task: Write Integration Tests
-    - [ ] Verify that clicking "Save" in Settings triggers a refresh in the Beam UI.
-- [ ] Task: Implement Integration Logic
+- [x] Task: Update `StatusBarController` to manage the Settings Window (75335)
+    - [x] Implement `openSettings()` to show the `SettingsView` in a standard `NSWindow`.
+- [x] Task: Update `CalendarManager` to filter events (75335)
+    - [x] Modify event fetching logic to only include events from `selectedCalendarIDs`.
+- [x] Task: Update `BeamWindow` and `BeamView` to reflect settings (75335)
+    - [x] Listen for settings changes (or update on Save) to reposition and restyle the beam.
+- [x] Task: Write Integration Tests (75335)
+    - [x] Verify that clicking "Save" in Settings triggers a refresh in the Beam UI.
+- [x] Task: Implement Integration Logic (75335)
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Integration & System Behavior' (Protocol in workflow.md)

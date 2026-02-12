@@ -46,12 +46,20 @@ class CalendarManager: ObservableObject {
         }.sorted(by: { $0.sourceName < $1.sourceName })
     }
     
-    func fetchEvents(for day: Date = Date()) {
+    func fetchEvents(for day: Date = Date(), calendarIDs: Set<String>? = nil) {
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: day)
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
         
-        let predicate = eventStore.predicateForEvents(withStart: startOfDay, end: endOfDay, calendars: nil)
+        let ekCalendars: [EKCalendar]?
+        if let ids = calendarIDs, !ids.isEmpty {
+            let allCalendars = eventStore.calendars(for: .event)
+            ekCalendars = allCalendars.filter { ids.contains($0.calendarIdentifier) }
+        } else {
+            ekCalendars = nil
+        }
+        
+        let predicate = eventStore.predicateForEvents(withStart: startOfDay, end: endOfDay, calendars: ekCalendars)
         let ekEvents = eventStore.events(matching: predicate)
         
         self.events = Self.transform(ekEvents: ekEvents, for: day)

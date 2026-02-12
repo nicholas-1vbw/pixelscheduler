@@ -10,7 +10,7 @@ import Combine
 
 struct BeamView: View {
     let events: [TimelineEvent]
-    let position: BeamPosition
+    @ObservedObject var settings: SettingsManager
     @State private var currentProgress: Double = CalendarManager.dayProgress()
     @State private var hoveredEvent: TimelineEvent? = nil
     
@@ -19,14 +19,14 @@ struct BeamView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Background bar (very faint)
-                Color.black.opacity(0.1)
+                // Background bar
+                Color(hex: settings.beamBaseColorHex).opacity(0.3)
                 
                 // Event segments
                 ForEach(events) { event in
                     EventSegmentView(
                         event: event,
-                        position: position,
+                        position: settings.beamPosition,
                         containerSize: geometry.size,
                         hoveredEvent: $hoveredEvent
                     )
@@ -43,19 +43,19 @@ struct BeamView: View {
     
     @ViewBuilder
     private func nowIndicator(in size: CGSize) -> some View {
-        let isVertical = position == .left || position == .right
+        let isVertical = settings.beamPosition == .left || settings.beamPosition == .right
         let indicatorSize: CGFloat = 8
         let progress = currentProgress
         
         if isVertical {
-            NowIndicatorShape(position: position)
-                .fill(Color.white)
+            NowIndicatorShape(position: settings.beamPosition)
+                .fill(Color(hex: settings.indicatorColorHex))
                 .shadow(radius: 1)
                 .frame(width: size.width, height: indicatorSize)
                 .position(x: size.width / 2, y: clamp(size.height * progress, min: 4, max: size.height - 4))
         } else {
-            NowIndicatorShape(position: position)
-                .fill(Color.white)
+            NowIndicatorShape(position: settings.beamPosition)
+                .fill(Color(hex: settings.indicatorColorHex))
                 .shadow(radius: 1)
                 .frame(width: indicatorSize, height: size.height)
                 .position(x: clamp(size.width * progress, min: 4, max: size.width - 4), y: size.height / 2)
@@ -186,6 +186,6 @@ struct NowIndicatorShape: Shape {
     BeamView(events: [
         TimelineEvent(id: "1", title: "Test Event", startDate: now, endDate: now.addingTimeInterval(1800), startOffset: 0.1, durationWidth: 0.05, color: .blue, calendarName: "Work"),
         TimelineEvent(id: "2", title: "Meeting", startDate: now.addingTimeInterval(3600), endDate: now.addingTimeInterval(7200), startOffset: 0.5, durationWidth: 0.1, color: .red, calendarName: "Personal")
-    ], position: .top)
+    ], settings: SettingsManager(userDefaults: .standard))
     .frame(width: 800, height: 20)
 }
