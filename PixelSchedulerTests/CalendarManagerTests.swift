@@ -20,12 +20,18 @@ struct CalendarManagerTests {
         #expect(granted == true)
     }
 
-    @Test func testRequestAccessFailure() async throws {
+    @Test func testFetchEvents() async throws {
         let mockStore = MockEventStore()
-        mockStore.accessGranted = false
-        let manager = CalendarManager(store: mockStore)
-        let granted = try await manager.requestAccess()
-        #expect(granted == false)
+        let manager = await CalendarManager(store: mockStore)
+        
+        let now = Date()
+        await manager.fetchEvents(for: now)
+        
+        // MockStore returns 2 events by default
+        let events = await manager.events
+        #expect(events.count == 2)
+        #expect(events[0].title == "Event 1")
+        #expect(events[1].title == "Event 2")
     }
 }
 
@@ -35,5 +41,24 @@ class MockEventStore: EventStoreProtocol {
     
     func requestAccess() async throws -> Bool {
         return accessGranted
+    }
+    
+    func events(matching predicate: NSPredicate) -> [EKEvent] {
+        // Return some dummy events
+        let event1 = EKEvent(eventStore: EKEventStore())
+        event1.title = "Event 1"
+        event1.startDate = Date()
+        event1.endDate = Date().addingTimeInterval(3600)
+        
+        let event2 = EKEvent(eventStore: EKEventStore())
+        event2.title = "Event 2"
+        event2.startDate = Date().addingTimeInterval(7200)
+        event2.endDate = Date().addingTimeInterval(10800)
+        
+        return [event1, event2]
+    }
+    
+    func predicateForEvents(withStart start: Date, end: Date, calendars: [EKCalendar]?) -> NSPredicate {
+        return NSPredicate(value: true)
     }
 }
