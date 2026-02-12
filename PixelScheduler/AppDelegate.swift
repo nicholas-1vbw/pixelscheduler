@@ -59,8 +59,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                DispatchQueue.main.async {
+                // Use Task to wait for the next run loop iteration so properties are updated
+                Task { @MainActor in
                     self.beamWindow?.update(events: self.calendarManager.events, settings: self.settingsManager)
+                    
+                    // Only re-fetch if selected calendars changed
+                    // For now, re-fetching is safe but we could optimize further
                     self.calendarManager.fetchEvents(calendarIDs: self.settingsManager.selectedCalendarIDs)
                 }
             }

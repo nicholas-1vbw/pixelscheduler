@@ -15,9 +15,9 @@ Goal: Separate persistent settings from the active "session" settings to support
 ## Phase 2: LivePreview Integration
 Goal: Connect the `SettingsView` changes directly to the `BeamView` via the updated state management.
 
-- [ ] Task: Ensure `BeamView` and `BeamWindow` react immediately to changes in the `SettingsManager` session state.
-- [ ] Task: Verify that all UI controls in `SettingsView` (colors, position, thickness) trigger a redraw of the `BeamView`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: LivePreview Integration' (Protocol in workflow.md)
+- [x] Task: Ensure `BeamView` and `BeamWindow` react immediately to changes in the `SettingsManager` session state. f8900e8
+- [x] Task: Verify that all UI controls in `SettingsView` (colors, position, thickness) trigger a redraw of the `BeamView`. f8900e8
+- [x] Task: Conductor - User Manual Verification 'Phase 2: LivePreview Integration' (Protocol in workflow.md)
 
 ## Phase 3: Save/Cancel/Restoration Logic
 Goal: Implement the UI and lifecycle events for persisting or discarding changes.
