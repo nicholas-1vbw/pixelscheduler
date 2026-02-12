@@ -70,4 +70,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             .store(in: &cancellables)
     }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        settingsManager.revertSession()
+    }
 }

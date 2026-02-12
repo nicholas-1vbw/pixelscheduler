@@ -22,13 +22,13 @@ Goal: Connect the `SettingsView` changes directly to the `BeamView` via the upda
 ## Phase 3: Save/Cancel/Restoration Logic
 Goal: Implement the UI and lifecycle events for persisting or discarding changes.
 
-- [ ] Task: Add "Save" and "Cancel" buttons to `SettingsView`.
-    - [ ] Task: "Save" button triggers `SettingsManager.save()`.
-    - [ ] Task: "Cancel" button triggers `SettingsManager.revert()` and closes the window.
-- [ ] Task: Implement window lifecycle hooks to trigger restoration.
-    - [ ] Task: Restore settings if the `SettingsView` is closed without saving.
-    - [ ] Task: Ensure settings are restored on app termination if unsaved.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Save/Cancel/Restoration Logic' (Protocol in workflow.md)
+- [x] Task: Add "Save" and "Cancel" buttons to `SettingsView`. bb5e592
+    - [x] Task: "Save" button triggers `SettingsManager.save()`. bb5e592
+    - [x] Task: "Cancel" button triggers `SettingsManager.revert()` and closes the window. bb5e592
+- [x] Task: Implement window lifecycle hooks to trigger restoration. bb5e592
+    - [x] Task: Restore settings if the `SettingsView` is closed without saving. bb5e592
+    - [x] Task: Ensure settings are restored on app termination if unsaved. bb5e592
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Save/Cancel/Restoration Logic' (Protocol in workflow.md)
 
 ## Phase 4: Final Polishing & Edge Cases
 Goal: Ensure a smooth user experience and handle edge cases.

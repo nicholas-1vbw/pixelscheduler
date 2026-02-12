@@ -26,6 +26,7 @@ class SettingsViewModel: ObservableObject {
         didSet { settingsManager.selectedCalendarIDs = selectedCalendarIDs }
     }
     @Published var groupedCalendars: [CalendarGroup] = []
+    var isSaved = false
     
     private let settingsManager: SettingsManager
     private let calendarManager: CalendarManager
@@ -78,6 +79,7 @@ class SettingsViewModel: ObservableObject {
         
         // Persist to disk
         settingsManager.save()
+        isSaved = true
     }
     
     func cancel() {

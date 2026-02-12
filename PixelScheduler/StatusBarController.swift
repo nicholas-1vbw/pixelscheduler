@@ -13,6 +13,7 @@ class StatusBarController: NSObject {
     private let calendarManager: CalendarManager
     private let settingsManager: SettingsManager
     private var settingsWindow: NSWindow?
+    private var currentViewModel: SettingsViewModel?
     
     init(calendarManager: CalendarManager, settingsManager: SettingsManager) {
         self.calendarManager = calendarManager
@@ -55,6 +56,7 @@ class StatusBarController: NSObject {
             if self.settingsWindow == nil {
                 print("DEBUG: Creating new settings window")
                 let viewModel = SettingsViewModel(settingsManager: self.settingsManager, calendarManager: self.calendarManager)
+                self.currentViewModel = viewModel
                 let settingsView = SettingsView(viewModel: viewModel)
                 let hostingView = NSHostingView(rootView: settingsView)
                 
@@ -91,6 +93,10 @@ class StatusBarController: NSObject {
 
 extension StatusBarController: NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
-        // Just let it hide, it's not released when closed
+        if let viewModel = currentViewModel, !viewModel.isSaved {
+            viewModel.cancel()
+        }
+        currentViewModel = nil
+        settingsWindow = nil // Release the window so it's recreated next time with fresh state
     }
 }

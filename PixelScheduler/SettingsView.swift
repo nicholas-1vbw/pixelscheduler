@@ -86,6 +86,7 @@ struct SettingsView: View {
             
             HStack {
                 Button("Cancel") {
+                    viewModel.cancel()
                     dismiss()
                 }
                 .keyboardShortcut(.escape, modifiers: [])
