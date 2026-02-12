@@ -18,9 +18,17 @@ class StatusBarController: NSObject {
     
     private func setupMenu() {
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Update Now", action: #selector(refresh), keyEquivalent: "r"))
+        
+        let refreshItem = NSMenuItem(title: "Update Now", action: #selector(refresh), keyEquivalent: "r")
+        refreshItem.target = self
+        menu.addItem(refreshItem)
+        
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Exit", action: #selector(exitApp), keyEquivalent: "q"))
+        
+        let exitItem = NSMenuItem(title: "Exit", action: #selector(exitApp), keyEquivalent: "q")
+        exitItem.target = self
+        menu.addItem(exitItem)
+        
         statusItem.menu = menu
         
         if let button = statusItem.button {
