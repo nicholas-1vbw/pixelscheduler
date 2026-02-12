@@ -10,6 +10,7 @@ import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarController: StatusBarController?
+    var beamWindow: BeamWindow?
     let calendarManager = CalendarManager()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -19,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         statusBarController = StatusBarController()
+        beamWindow = BeamWindow()
         
         Task {
             do {
