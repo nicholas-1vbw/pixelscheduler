@@ -25,9 +25,9 @@ This plan outlines the steps to implement the core "Timer Beam" window and basic
 - [x] Task: Transparent Overlay Window [commit: bf1d317]
     - [x] Write unit tests to verify the configuration of the `NSPanel` (transparent, non-interactive, stays on top).
     - [x] Implement the `BeamWindow` using `NSPanel`.
-- [ ] Task: Beam Positioning & Orientation
-    - [ ] Write unit tests for calculating window frame based on screen edge (Top, Bottom, Left, Right).
-    - [ ] Implement window positioning logic based on user settings (default to Top).
+- [x] Task: Beam Positioning & Orientation [commit: 2141184]
+    - [x] Write unit tests for calculating window frame based on screen edge (Top, Bottom, Left, Right).
+    - [x] Implement window positioning logic based on user settings (default to Top).
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: The Timer Beam UI' (Protocol in workflow.md)
 
 ## Phase 4: Rendering & Visualization
