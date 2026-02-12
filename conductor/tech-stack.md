@@ -14,4 +14,5 @@
 
 ## Architecture & Patterns
 - **Concurrency:** Extensive use of Swift Concurrency (`async/await`, `MainActor`) to ensure data fetching doesn't block the UI.
+- **Session-based State Management:** Decoupled transient "session" state from persistent storage to support real-time preview and transactional updates (Save/Cancel).
 - **Visual Rendering:** Combination of SwiftUI `Canvas` or custom `NSView` drawing for the high-performance, transparent "Timer Beam."
