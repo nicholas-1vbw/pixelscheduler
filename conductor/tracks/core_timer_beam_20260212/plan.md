@@ -12,14 +12,14 @@ This plan outlines the steps to implement the core "Timer Beam" window and basic
     - [x] Implement the `CalendarManager` to request access and handle the authorization status.
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Permissions' (Protocol in workflow.md)
 
-## Phase 2: Data Fetching Layer
+## Phase 2: Data Fetching Layer [checkpoint: 3ca3e70]
 - [x] Task: Event Fetching Logic [commit: 374902a]
     - [x] Write unit tests for fetching events for a specific day and filtering by calendar (using mock data).
     - [x] Implement the `fetchEvents(for day: Date)` method in `CalendarManager`.
 - [x] Task: Event Data Transformation [commit: 91b1a59]
     - [x] Write unit tests for mapping `EKEvent` data to a simplified internal `Event` model suitable for UI rendering.
     - [x] Implement the transformation logic, including mapping 24 hours to a 0.0 - 1.0 range.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Data Fetching Layer' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Data Fetching Layer' (Protocol in workflow.md)
 
 ## Phase 3: The Timer Beam UI
 - [ ] Task: Transparent Overlay Window
