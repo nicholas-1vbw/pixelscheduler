@@ -11,15 +11,15 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Settings Data & Persistence Foundation' (Protocol in workflow.md) (70b89f4)
 
 ## Phase 2: Settings UI - Layout & Appearance Controls
-- [ ] Task: Create `SettingsView` (SwiftUI) with a single-page layout
-    - [ ] Implement Section for **Beam Appearance**.
-    - [ ] Add Segmented Control for **Position** (Top, Bottom, Left, Right).
-    - [ ] Add Slider for **Thickness** (1px to 50px) with numeric display.
-    - [ ] Add Color controls for **Base Color** and **Indicator Color** (Presets + Hex Input).
-- [ ] Task: Write Tests for `SettingsView` (UI Tests or Unit Tests for View State)
-    - [ ] Verify that controls update the draft state in the view.
-- [ ] Task: Implement Appearance Controls in `SettingsView`
-- [ ] Task: Add "Save" and "Cancel" buttons with explicit save logic
+- [x] Task: Create `SettingsView` (SwiftUI) with a single-page layout (71702)
+    - [x] Implement Section for **Beam Appearance**.
+    - [x] Add Segmented Control for **Position** (Top, Bottom, Left, Right).
+    - [x] Add Slider for **Thickness** (1px to 50px) with numeric display.
+    - [x] Add Color controls for **Base Color** and **Indicator Color** (Presets + Hex Input).
+- [x] Task: Write Tests for `SettingsView` (UI Tests or Unit Tests for View State) (71702)
+    - [x] Verify that controls update the draft state in the view.
+- [x] Task: Implement Appearance Controls in `SettingsView` (71702)
+- [x] Task: Add "Save" and "Cancel" buttons with explicit save logic (71702)
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Settings UI - Layout & Appearance Controls' (Protocol in workflow.md)
 
 ## Phase 3: Settings UI - Calendar Management
