@@ -18,6 +18,7 @@ final class PixelSchedulerUITests: XCTestCase {
         app.launch()
         
         // Basic check to see if app is running
-        XCTAssertEqual(app.state, .runningForeground)
+        // For menu bar apps, .runningBackground is also an acceptable state
+        XCTAssertTrue(app.state == .runningForeground || app.state == .runningBackground, "App should be running (either in foreground or background)")
     }
 }
