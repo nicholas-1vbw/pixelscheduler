@@ -21,17 +21,17 @@ This plan outlines the steps to implement the core "Timer Beam" window and basic
     - [x] Implement the transformation logic, including mapping 24 hours to a 0.0 - 1.0 range.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Data Fetching Layer' (Protocol in workflow.md)
 
-## Phase 3: The Timer Beam UI
+## Phase 3: The Timer Beam UI [checkpoint: cd96000]
 - [x] Task: Transparent Overlay Window [commit: bf1d317]
     - [x] Write unit tests to verify the configuration of the `NSPanel` (transparent, non-interactive, stays on top).
     - [x] Implement the `BeamWindow` using `NSPanel`.
 - [x] Task: Beam Positioning & Orientation [commit: 2141184]
     - [x] Write unit tests for calculating window frame based on screen edge (Top, Bottom, Left, Right).
     - [x] Implement window positioning logic based on user settings (default to Top).
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: The Timer Beam UI' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: The Timer Beam UI' (Protocol in workflow.md)
 
-## Phase 4: Rendering & Visualization
-- [ ] Task: Basic Beam Rendering
-    - [ ] Write unit tests to verify the drawing logic for event segments (correct offsets and widths).
-    - [ ] Implement the `BeamView` (SwiftUI or custom `NSView`) to render event segments on the window.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Rendering & Visualization' (Protocol in workflow.md)
+## Phase 4: Rendering & Visualization [checkpoint: e4a9ae6]
+- [x] Task: Basic Beam Rendering [commit: e4a9ae6]
+    - [x] Write unit tests to verify the drawing logic for event segments (correct offsets and widths).
+    - [x] Implement the `BeamView` (SwiftUI or custom `NSView`) to render event segments on the window.
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Rendering & Visualization' (Protocol in workflow.md)
