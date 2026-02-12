@@ -6,59 +6,186 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BeamView: View {
     let events: [TimelineEvent]
     let position: BeamPosition
+    @State private var currentProgress: Double = CalendarManager.dayProgress()
+    @State private var hoveredEvent: TimelineEvent? = nil
+    
+    let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .leading) {
+            ZStack {
                 // Background bar (very faint)
                 Color.black.opacity(0.1)
                 
                 // Event segments
                 ForEach(events) { event in
-                    segment(for: event, in: geometry.size)
+                    EventSegmentView(
+                        event: event,
+                        position: position,
+                        containerSize: geometry.size,
+                        hoveredEvent: $hoveredEvent
+                    )
                 }
                 
-                // "Now" indicator (just a placeholder for now)
+                // "Now" indicator
                 nowIndicator(in: geometry.size)
             }
         }
-    }
-    
-    @ViewBuilder
-    private func segment(for event: TimelineEvent, in size: CGSize) -> some View {
-        let isVertical = position == .left || position == .right
-        
-        if isVertical {
-            Rectangle()
-                .fill(event.color)
-                .frame(width: size.width, height: size.height * event.durationWidth)
-                .offset(y: size.height * event.startOffset)
-        } else {
-            Rectangle()
-                .fill(event.color)
-                .frame(width: size.width * event.durationWidth, height: size.height)
-                .offset(x: size.width * event.startOffset)
+        .onReceive(timer) { _ in
+            currentProgress = CalendarManager.dayProgress()
         }
     }
     
     @ViewBuilder
     private func nowIndicator(in size: CGSize) -> some View {
-        // Placeholder for current time indicator
+        let isVertical = position == .left || position == .right
+        let indicatorSize: CGFloat = 8
+        let progress = currentProgress
+        
+        if isVertical {
+            NowIndicatorShape(position: position)
+                .fill(Color.white)
+                .shadow(radius: 1)
+                .frame(width: size.width, height: indicatorSize)
+                .position(x: size.width / 2, y: clamp(size.height * progress, min: 4, max: size.height - 4))
+        } else {
+            NowIndicatorShape(position: position)
+                .fill(Color.white)
+                .shadow(radius: 1)
+                .frame(width: indicatorSize, height: size.height)
+                .position(x: clamp(size.width * progress, min: 4, max: size.width - 4), y: size.height / 2)
+        }
+    }
+
+    private func clamp(_ value: CGFloat, min: CGFloat, max: CGFloat) -> CGFloat {
+        Swift.min(Swift.max(value, min), max)
+    }
+}
+
+struct EventSegmentView: View {
+    let event: TimelineEvent
+    let position: BeamPosition
+    let containerSize: CGSize
+    @Binding var hoveredEvent: TimelineEvent?
+    
+    var body: some View {
+        let isVertical = position == .left || position == .right
+        
         Rectangle()
-            .fill(Color.white)
-            .frame(width: 2, height: size.height) // Horizontal beam
-            // Logic to position based on current time will come later
+            .fill(event.color)
+            .frame(
+                width: isVertical ? containerSize.width : containerSize.width * event.durationWidth,
+                height: isVertical ? containerSize.height * event.durationWidth : containerSize.height
+            )
+            .onHover { hovering in
+                if hovering {
+                    hoveredEvent = event
+                } else if hoveredEvent?.id == event.id {
+                    hoveredEvent = nil
+                }
+            }
+            .popover(item: Binding(
+                get: { hoveredEvent?.id == event.id ? event : nil },
+                set: { if $0 == nil && hoveredEvent?.id == event.id { hoveredEvent = nil } }
+            )) { event in
+                EventPopoverView(event: event)
+            }
+            .position(
+                x: isVertical ? containerSize.width / 2 : containerSize.width * (event.startOffset + event.durationWidth / 2),
+                y: isVertical ? containerSize.height * (event.startOffset + event.durationWidth / 2) : containerSize.height / 2
+            )
+    }
+}
+
+struct EventPopoverView: View {
+    let event: TimelineEvent
+    
+    private var timeString: String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return "\(formatter.string(from: event.startDate)) - \(formatter.string(from: event.endDate))"
+    }
+    
+    private var durationString: String {
+        let duration = event.endDate.timeIntervalSince(event.startDate)
+        let hours = Int(duration) / 3600
+        let minutes = (Int(duration) % 3600) / 60
+        if hours > 0 {
+            return "\(hours)h \(minutes)m"
+        } else {
+            return "\(minutes)m"
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(event.title)
+                .font(.headline)
+            
+            Text(timeString)
+                .font(.subheadline)
+            
+            HStack {
+                Text(durationString)
+                Spacer()
+                HStack(spacing: 4) {
+                    Circle()
+                        .fill(event.color)
+                        .frame(width: 8, height: 8)
+                    Text(event.calendarName)
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
+        .padding(12)
+        .frame(width: 200)
+    }
+}
+
+struct NowIndicatorShape: Shape {
+    let position: BeamPosition
+    
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        switch position {
+        case .top:
+            path.move(to: CGPoint(x: rect.midX - 4, y: 0))
+            path.addLine(to: CGPoint(x: rect.midX + 4, y: 0))
+            path.addLine(to: CGPoint(x: rect.midX, y: 8))
+            path.closeSubpath()
+        case .bottom:
+            path.move(to: CGPoint(x: rect.midX - 4, y: rect.height))
+            path.addLine(to: CGPoint(x: rect.midX + 4, y: rect.height))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.height - 8))
+            path.closeSubpath()
+        case .left:
+            path.move(to: CGPoint(x: 0, y: rect.midY - 4))
+            path.addLine(to: CGPoint(x: 0, y: rect.midY + 4))
+            path.addLine(to: CGPoint(x: 8, y: rect.midY))
+            path.closeSubpath()
+        case .right:
+            path.move(to: CGPoint(x: rect.width, y: rect.midY - 4))
+            path.addLine(to: CGPoint(x: rect.width, y: rect.midY + 4))
+            path.addLine(to: CGPoint(x: rect.width - 8, y: rect.midY))
+            path.closeSubpath()
+        }
+        
+        return path
     }
 }
 
 #Preview {
+    let now = Date()
     BeamView(events: [
-        TimelineEvent(id: "1", title: "Test", startOffset: 0.1, durationWidth: 0.05, color: .blue),
-        TimelineEvent(id: "2", title: "Meeting", startOffset: 0.5, durationWidth: 0.1, color: .red)
+        TimelineEvent(id: "1", title: "Test Event", startDate: now, endDate: now.addingTimeInterval(1800), startOffset: 0.1, durationWidth: 0.05, color: .blue, calendarName: "Work"),
+        TimelineEvent(id: "2", title: "Meeting", startDate: now.addingTimeInterval(3600), endDate: now.addingTimeInterval(7200), startOffset: 0.5, durationWidth: 0.1, color: .red, calendarName: "Personal")
     ], position: .top)
     .frame(width: 800, height: 20)
 }

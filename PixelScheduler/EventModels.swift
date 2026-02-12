@@ -12,9 +12,12 @@ import EventKit
 struct TimelineEvent: Identifiable, Sendable {
     let id: String
     let title: String
+    let startDate: Date
+    let endDate: Date
     let startOffset: Double // 0.0 to 1.0
     let durationWidth: Double // 0.0 to 1.0
     let color: Color
+    let calendarName: String
 }
 
 extension CalendarManager {
@@ -38,13 +41,17 @@ extension CalendarManager {
             // Fallback color logic
             let nsColor = ekEvent.calendar?.color ?? .systemBlue
             let color = Color(nsColor: nsColor)
+            let calendarName = ekEvent.calendar?.title ?? "Unknown"
             
             return TimelineEvent(
                 id: ekEvent.eventIdentifier ?? UUID().uuidString,
                 title: ekEvent.title ?? "Untitled Event",
+                startDate: start,
+                endDate: end,
                 startOffset: startOffset,
                 durationWidth: durationWidth,
-                color: color
+                color: color,
+                calendarName: calendarName
             )
         }
     }

@@ -11,9 +11,20 @@ import Combine
 class CalendarManager: ObservableObject {
     private let eventStore: EventStoreProtocol
     @Published var events: [TimelineEvent] = []
+    private var cancellables = Set<AnyCancellable>()
     
     init(store: EventStoreProtocol = EKEventStore()) {
         self.eventStore = store
+        setupSystemCalendarListener()
+    }
+    
+    private func setupSystemCalendarListener() {
+        NotificationCenter.default.publisher(for: .EKEventStoreChanged)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.fetchEvents()
+            }
+            .store(in: &cancellables)
     }
     
     func requestAccess() async throws -> Bool {
@@ -29,6 +40,14 @@ class CalendarManager: ObservableObject {
         let ekEvents = eventStore.events(matching: predicate)
         
         self.events = Self.transform(ekEvents: ekEvents, for: day)
+    }
+
+    static func dayProgress(at date: Date = Date()) -> Double {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        let secondsSinceMidnight = date.timeIntervalSince(startOfDay)
+        let totalSecondsInDay: Double = 24 * 60 * 60
+        return max(0, min(1, secondsSinceMidnight / totalSecondsInDay))
     }
 }
 

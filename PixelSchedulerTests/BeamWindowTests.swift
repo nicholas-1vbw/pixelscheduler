@@ -22,8 +22,8 @@ struct BeamWindowTests {
         // Stays on top
         #expect(window.level == .statusBar || window.level == .floating)
         
-        // Non-interactive
-        #expect(window.ignoresMouseEvents == true)
+        // Interactive enough for hover detection
+        #expect(window.ignoresMouseEvents == false)
         
         // Panel style
         #expect(window is NSPanel)

@@ -53,6 +53,27 @@ struct CalendarManagerTests {
         #expect(timelineEvent.title == "Test Event")
         #expect(abs(timelineEvent.startOffset - 0.5) < 0.001)
         #expect(abs(timelineEvent.durationWidth - (1.0/24.0)) < 0.001)
+        #expect(timelineEvent.calendarName != "")
+    }
+
+    @Test func testCurrentDayProgress() throws {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        
+        // Midday (12:00:00)
+        let midday = today.addingTimeInterval(12 * 3600)
+        let progressMidday = CalendarManager.dayProgress(at: midday)
+        #expect(abs(progressMidday - 0.5) < 0.0001)
+        
+        // Start of day (00:00:00)
+        let progressStart = CalendarManager.dayProgress(at: today)
+        #expect(abs(progressStart - 0.0) < 0.0001)
+        
+        // End of day (23:59:59 approx)
+        let almostMidnight = today.addingTimeInterval(24 * 3600 - 1)
+        let progressEnd = CalendarManager.dayProgress(at: almostMidnight)
+        #expect(progressEnd > 0.999)
+        #expect(progressEnd < 1.0)
     }
 }
 

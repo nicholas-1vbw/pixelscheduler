@@ -4,10 +4,10 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: Implement the core "Timer Beam" window and basic calendar event fetching**
+- [x] **Track: Implement the core "Timer Beam" window and basic calendar event fetching**
   *Link: [./tracks/core_timer_beam_20260212/](./tracks/core_timer_beam_20260212/)*
 
 ---
 
-- [ ] **Track: UI Enhancements - Time Indicator & Event Popovers**
+- [x] **Track: UI Enhancements - Time Indicator & Event Popovers**
   *Link: [./tracks/ui_enhancements_20260212/](./tracks/ui_enhancements_20260212/)*

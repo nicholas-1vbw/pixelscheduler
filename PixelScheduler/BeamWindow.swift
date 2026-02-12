@@ -20,7 +20,7 @@ class BeamWindow: NSPanel {
         self.isOpaque = false
         self.backgroundColor = .clear // Back to clear, child view will provide color
         self.level = .statusBar
-        self.ignoresMouseEvents = true
+        self.ignoresMouseEvents = false // Enable mouse events for hover detection
         self.collectionBehavior = [.canJoinAllSpaces, .stationary]
         self.hasShadow = false
         

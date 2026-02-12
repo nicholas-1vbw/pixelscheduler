@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var cancellables = Set<AnyCancellable>()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Skip initialization logic if we are running in a testing environment
+        // Skip initialization logic if we are running in a unit testing environment
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
             return
         }
@@ -25,6 +25,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         beamWindow = BeamWindow()
         
         setupSubscriptions()
+        
+        // Skip permission request if requested by launch argument (useful for UI tests)
+        if CommandLine.arguments.contains("-SkipCalendarAccess") {
+            print("Skipping calendar access request as per launch argument.")
+            return
+        }
         
         Task {
             do {
