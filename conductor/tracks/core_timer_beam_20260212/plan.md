@@ -1,0 +1,37 @@
+# Implementation Plan: Core Timer Beam & Calendar Integration
+
+This plan outlines the steps to implement the core "Timer Beam" window and basic calendar event fetching for PixelScheduler.
+
+## Phase 1: Foundation & Permissions
+- [ ] Task: Project Initialization & Status Bar Setup
+    - [ ] Write unit tests to verify app delegate / lifecycle initialization and status item creation.
+    - [ ] Implement the status bar icon and basic menu (Exit, Manual Refresh).
+- [ ] Task: Calendar Access & Permissions
+    - [ ] Update `Info.plist` with `NSCalendarsUsageDescription`.
+    - [ ] Write unit tests to verify the permission handling logic (mocking `EKEventStore`).
+    - [ ] Implement the `CalendarManager` to request access and handle the authorization status.
+- [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Permissions' (Protocol in workflow.md)
+
+## Phase 2: Data Fetching Layer
+- [ ] Task: Event Fetching Logic
+    - [ ] Write unit tests for fetching events for a specific day and filtering by calendar (using mock data).
+    - [ ] Implement the `fetchEvents(for day: Date)` method in `CalendarManager`.
+- [ ] Task: Event Data Transformation
+    - [ ] Write unit tests for mapping `EKEvent` data to a simplified internal `Event` model suitable for UI rendering.
+    - [ ] Implement the transformation logic, including mapping 24 hours to a 0.0 - 1.0 range.
+- [ ] Task: Conductor - User Manual Verification 'Phase 2: Data Fetching Layer' (Protocol in workflow.md)
+
+## Phase 3: The Timer Beam UI
+- [ ] Task: Transparent Overlay Window
+    - [ ] Write unit tests to verify the configuration of the `NSPanel` (transparent, non-interactive, stays on top).
+    - [ ] Implement the `BeamWindow` using `NSPanel`.
+- [ ] Task: Beam Positioning & Orientation
+    - [ ] Write unit tests for calculating window frame based on screen edge (Top, Bottom, Left, Right).
+    - [ ] Implement window positioning logic based on user settings (default to Top).
+- [ ] Task: Conductor - User Manual Verification 'Phase 3: The Timer Beam UI' (Protocol in workflow.md)
+
+## Phase 4: Rendering & Visualization
+- [ ] Task: Basic Beam Rendering
+    - [ ] Write unit tests to verify the drawing logic for event segments (correct offsets and widths).
+    - [ ] Implement the `BeamView` (SwiftUI or custom `NSView`) to render event segments on the window.
+- [ ] Task: Conductor - User Manual Verification 'Phase 4: Rendering & Visualization' (Protocol in workflow.md)
