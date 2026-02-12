@@ -7,6 +7,12 @@ import Foundation
 import EventKit
 import Combine
 
+struct CalendarGroup: Identifiable {
+    let id: String
+    let sourceName: String
+    let calendars: [EKCalendar]
+}
+
 @MainActor
 class CalendarManager: ObservableObject {
     private let eventStore: EventStoreProtocol
@@ -29,6 +35,15 @@ class CalendarManager: ObservableObject {
     
     func requestAccess() async throws -> Bool {
         return try await eventStore.requestAccess()
+    }
+    
+    func fetchGroupedCalendars() -> [CalendarGroup] {
+        let calendars = eventStore.calendars(for: .event)
+        let grouped = Dictionary(grouping: calendars) { $0.source.title }
+        
+        return grouped.map { (sourceName, calendars) in
+            CalendarGroup(id: sourceName, sourceName: sourceName, calendars: calendars.sorted(by: { $0.title < $1.title }))
+        }.sorted(by: { $0.sourceName < $1.sourceName })
     }
     
     func fetchEvents(for day: Date = Date()) {
@@ -55,6 +70,7 @@ protocol EventStoreProtocol {
     func requestAccess() async throws -> Bool
     func events(matching predicate: NSPredicate) -> [EKEvent]
     func predicateForEvents(withStart start: Date, end: Date, calendars: [EKCalendar]?) -> NSPredicate
+    func calendars(for entityType: EKEntityType) -> [EKCalendar]
 }
 
 extension EKEventStore: EventStoreProtocol {
@@ -64,5 +80,9 @@ extension EKEventStore: EventStoreProtocol {
         } else {
             return try await requestAccess(to: .event)
         }
+    }
+    
+    func calendars(for entityType: EKEntityType) -> [EKCalendar] {
+        return self.calendars(for: entityType)
     }
 }

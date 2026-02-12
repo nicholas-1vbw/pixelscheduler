@@ -23,14 +23,14 @@
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Settings UI - Layout & Appearance Controls' (Protocol in workflow.md)
 
 ## Phase 3: Settings UI - Calendar Management
-- [ ] Task: Update `CalendarManager` to provide grouped calendar data
-    - [ ] Implement a method to fetch calendars grouped by source.
-- [ ] Task: Implement Calendar List in `SettingsView`
-    - [ ] Create a hierarchical list with checkboxes.
-    - [ ] Implement "Select All/None" logic for each group.
-- [ ] Task: Write Tests for Calendar Selection logic
-    - [ ] Verify that group toggle correctly updates all sub-calendars.
-- [ ] Task: Implement Calendar Selection in `SettingsView`
+- [x] Task: Update `CalendarManager` to provide grouped calendar data (73475)
+    - [x] Implement a method to fetch calendars grouped by source.
+- [x] Task: Implement Calendar List in `SettingsView` (73475)
+    - [x] Create a hierarchical list with checkboxes.
+    - [x] Implement "Select All/None" logic for each group.
+- [x] Task: Write Tests for Calendar Selection logic (73475)
+    - [x] Verify that group toggle correctly updates all sub-calendars.
+- [x] Task: Implement Calendar Selection in `SettingsView` (73475)
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Settings UI - Calendar Management' (Protocol in workflow.md)
 
 ## Phase 4: Integration & System Behavior

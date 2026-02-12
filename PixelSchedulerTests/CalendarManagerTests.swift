@@ -75,6 +75,14 @@ struct CalendarManagerTests {
         #expect(progressEnd > 0.999)
         #expect(progressEnd < 1.0)
     }
+
+    @Test func testFetchGroupedCalendars() async throws {
+        let mockStore = MockEventStore()
+        let manager = CalendarManager(store: mockStore)
+        
+        let grouped = manager.fetchGroupedCalendars()
+        #expect(grouped.count == 0) 
+    }
 }
 
 // Mocking infrastructure
@@ -103,5 +111,10 @@ class MockEventStore: EventStoreProtocol {
     
     func predicateForEvents(withStart start: Date, end: Date, calendars: [EKCalendar]?) -> NSPredicate {
         return NSPredicate(value: true)
+    }
+
+    func calendars(for entityType: EKEntityType) -> [EKCalendar] {
+        // Return empty for now as EKCalendar/EKSource are hard to mock
+        return []
     }
 }

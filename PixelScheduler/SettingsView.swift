@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel
@@ -33,6 +34,50 @@ struct SettingsView: View {
                 
                 Section(header: Text("Indicator Color")) {
                     ColorControl(hex: $viewModel.indicatorColorHex)
+                }
+                
+                Section(header: Text("Calendars")) {
+                    if viewModel.groupedCalendars.isEmpty {
+                        Text("No calendars found or access not granted.")
+                            .foregroundColor(.secondary)
+                    } else {
+                        List {
+                            ForEach(viewModel.groupedCalendars) { group in
+                                DisclosureGroup(
+                                    isExpanded: .constant(true),
+                                    content: {
+                                        ForEach(group.calendars, id: \.calendarIdentifier) { calendar in
+                                            Toggle(isOn: Binding(
+                                                get: { viewModel.selectedCalendarIDs.contains(calendar.calendarIdentifier) },
+                                                set: { _ in viewModel.toggleCalendar(calendar.calendarIdentifier) }
+                                            )) {
+                                                HStack {
+                                                    Circle()
+                                                        .fill(Color(nsColor: calendar.color))
+                                                        .frame(width: 8, height: 8)
+                                                    Text(calendar.title)
+                                                }
+                                            }
+                                            .toggleStyle(.checkbox)
+                                        }
+                                    },
+                                    label: {
+                                        HStack {
+                                            Toggle(isOn: Binding(
+                                                get: { viewModel.isGroupSelected(group) },
+                                                set: { _ in viewModel.toggleGroup(group) }
+                                            )) {
+                                                Text(group.sourceName)
+                                                    .font(.headline)
+                                            }
+                                            .toggleStyle(.checkbox)
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                        .frame(minHeight: 200)
+                    }
                 }
             }
             .formStyle(.grouped)
@@ -103,6 +148,16 @@ struct ColorControl: View {
     }
 }
 
+class PreviewMockEventStore: EventStoreProtocol {
+    func requestAccess() async throws -> Bool { true }
+    func events(matching predicate: NSPredicate) -> [EKEvent] { [] }
+    func predicateForEvents(withStart start: Date, end: Date, calendars: [EKCalendar]?) -> NSPredicate { NSPredicate(value: true) }
+    func calendars(for entityType: EKEntityType) -> [EKCalendar] { [] }
+}
+
 #Preview {
-    SettingsView(viewModel: SettingsViewModel(settingsManager: SettingsManager(userDefaults: .standard)))
+    SettingsView(viewModel: SettingsViewModel(
+        settingsManager: SettingsManager(userDefaults: .standard),
+        calendarManager: CalendarManager(store: PreviewMockEventStore())
+    ))
 }
