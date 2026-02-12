@@ -1,14 +1,14 @@
 # Implementation Plan: Settings Window & Configuration
 
 ## Phase 1: Settings Data & Persistence Foundation
-- [ ] Task: Create `SettingsManager` to handle persistence via `UserDefaults`
-    - [ ] Define `SettingsManager` with properties for `beamPosition`, `beamThickness`, `beamBaseColor`, `indicatorColor`, and `selectedCalendarIDs`.
-    - [ ] Implement `save()` and `load()` methods.
-- [ ] Task: Write Tests for `SettingsManager`
-    - [ ] Verify that default values are correctly initialized.
-    - [ ] Verify that values persist and retrieve correctly from `UserDefaults`.
-- [ ] Task: Implement `SettingsManager`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Settings Data & Persistence Foundation' (Protocol in workflow.md)
+- [x] Task: Create `SettingsManager` to handle persistence via `UserDefaults` (70b89f4)
+    - [x] Define `SettingsManager` with properties for `beamPosition`, `beamThickness`, `beamBaseColor`, `indicatorColor`, and `selectedCalendarIDs`.
+    - [x] Implement `save()` and `load()` methods.
+- [x] Task: Write Tests for `SettingsManager` (70b89f4)
+    - [x] Verify that default values are correctly initialized.
+    - [x] Verify that values persist and retrieve correctly from `UserDefaults`.
+- [x] Task: Implement `SettingsManager` (70b89f4)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Settings Data & Persistence Foundation' (Protocol in workflow.md) (70b89f4)
 
 ## Phase 2: Settings UI - Layout & Appearance Controls
 - [ ] Task: Create `SettingsView` (SwiftUI) with a single-page layout
