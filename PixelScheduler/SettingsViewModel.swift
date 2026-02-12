@@ -10,11 +10,21 @@ import EventKit
 
 @MainActor
 class SettingsViewModel: ObservableObject {
-    @Published var beamPosition: BeamPosition
-    @Published var beamThickness: Double
-    @Published var beamBaseColorHex: String
-    @Published var indicatorColorHex: String
-    @Published var selectedCalendarIDs: Set<String>
+    @Published var beamPosition: BeamPosition {
+        didSet { settingsManager.beamPosition = beamPosition }
+    }
+    @Published var beamThickness: Double {
+        didSet { settingsManager.beamThickness = beamThickness }
+    }
+    @Published var beamBaseColorHex: String {
+        didSet { settingsManager.beamBaseColorHex = beamBaseColorHex }
+    }
+    @Published var indicatorColorHex: String {
+        didSet { settingsManager.indicatorColorHex = indicatorColorHex }
+    }
+    @Published var selectedCalendarIDs: Set<String> {
+        didSet { settingsManager.selectedCalendarIDs = selectedCalendarIDs }
+    }
     @Published var groupedCalendars: [CalendarGroup] = []
     
     private let settingsManager: SettingsManager
@@ -31,6 +41,9 @@ class SettingsViewModel: ObservableObject {
         self.selectedCalendarIDs = settingsManager.selectedCalendarIDs
         
         self.groupedCalendars = calendarManager.fetchGroupedCalendars()
+        
+        // Start a session for LivePreview
+        settingsManager.beginSession()
     }
     
     func toggleCalendar(_ id: String) {
@@ -56,10 +69,25 @@ class SettingsViewModel: ObservableObject {
     }
     
     func save() {
+        // Push final values to manager (already pushed by didSet, but good to be sure)
         settingsManager.beamPosition = beamPosition
         settingsManager.beamThickness = beamThickness
         settingsManager.beamBaseColorHex = beamBaseColorHex
         settingsManager.indicatorColorHex = indicatorColorHex
         settingsManager.selectedCalendarIDs = selectedCalendarIDs
+        
+        // Persist to disk
+        settingsManager.save()
+    }
+    
+    func cancel() {
+        settingsManager.revertSession()
+        
+        // Update own properties back to original state to reflect reversion in UI
+        self.beamPosition = settingsManager.beamPosition
+        self.beamThickness = settingsManager.beamThickness
+        self.beamBaseColorHex = settingsManager.beamBaseColorHex
+        self.indicatorColorHex = settingsManager.indicatorColorHex
+        self.selectedCalendarIDs = settingsManager.selectedCalendarIDs
     }
 }

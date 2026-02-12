@@ -21,25 +21,21 @@ class SettingsManager: ObservableObject {
         static let selectedCalendarIDs = "selectedCalendarIDs"
     }
     
-    @Published var beamPosition: BeamPosition {
-        didSet { save() }
+    @Published var beamPosition: BeamPosition
+    @Published var beamThickness: Double
+    @Published var beamBaseColorHex: String
+    @Published var indicatorColorHex: String
+    @Published var selectedCalendarIDs: Set<String>
+    
+    private struct Snapshot {
+        let beamPosition: BeamPosition
+        let beamThickness: Double
+        let beamBaseColorHex: String
+        let indicatorColorHex: String
+        let selectedCalendarIDs: Set<String>
     }
     
-    @Published var beamThickness: Double {
-        didSet { save() }
-    }
-    
-    @Published var beamBaseColorHex: String {
-        didSet { save() }
-    }
-    
-    @Published var indicatorColorHex: String {
-        didSet { save() }
-    }
-    
-    @Published var selectedCalendarIDs: Set<String> {
-        didSet { save() }
-    }
+    private var snapshot: Snapshot?
     
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
@@ -57,11 +53,32 @@ class SettingsManager: ObservableObject {
         self.selectedCalendarIDs = Set(savedIDs)
     }
     
+    func beginSession() {
+        snapshot = Snapshot(
+            beamPosition: beamPosition,
+            beamThickness: beamThickness,
+            beamBaseColorHex: beamBaseColorHex,
+            indicatorColorHex: indicatorColorHex,
+            selectedCalendarIDs: selectedCalendarIDs
+        )
+    }
+    
+    func revertSession() {
+        guard let snapshot = snapshot else { return }
+        beamPosition = snapshot.beamPosition
+        beamThickness = snapshot.beamThickness
+        beamBaseColorHex = snapshot.beamBaseColorHex
+        indicatorColorHex = snapshot.indicatorColorHex
+        selectedCalendarIDs = snapshot.selectedCalendarIDs
+        self.snapshot = nil
+    }
+    
     func save() {
         userDefaults.set(beamPosition.rawValue, forKey: Keys.beamPosition)
         userDefaults.set(beamThickness, forKey: Keys.beamThickness)
         userDefaults.set(beamBaseColorHex, forKey: Keys.beamBaseColorHex)
         userDefaults.set(indicatorColorHex, forKey: Keys.indicatorColorHex)
         userDefaults.set(Array(selectedCalendarIDs), forKey: Keys.selectedCalendarIDs)
+        snapshot = nil
     }
 }

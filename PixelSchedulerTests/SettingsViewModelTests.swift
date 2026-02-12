@@ -34,8 +34,9 @@ struct SettingsViewModelTests {
         viewModel.beamPosition = .right
         viewModel.beamThickness = 25.0
         
-        // Before save, manager should still have old values
-        #expect(manager.beamPosition == .top) // default
+        // With LivePreview, manager should update immediately
+        #expect(manager.beamPosition == .right)
+        #expect(manager.beamThickness == 25.0)
         
         viewModel.save()
         

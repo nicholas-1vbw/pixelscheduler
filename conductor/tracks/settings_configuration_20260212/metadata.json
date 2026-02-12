@@ -1,8 +1,0 @@
-{
-  "track_id": "settings_configuration_20260212",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-02-12T10:00:00Z",
-  "updated_at": "2026-02-12T10:00:00Z",
-  "description": "新增设置相关 windows/menu，要求能够选择显示哪些日历簿，配置 beam bar 位置，粗细和颜色"
-}

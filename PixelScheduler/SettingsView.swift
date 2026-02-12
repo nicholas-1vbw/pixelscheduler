@@ -152,7 +152,7 @@ class PreviewMockEventStore: EventStoreProtocol {
     func requestAccess() async throws -> Bool { true }
     func events(matching predicate: NSPredicate) -> [EKEvent] { [] }
     func predicateForEvents(withStart start: Date, end: Date, calendars: [EKCalendar]?) -> NSPredicate { NSPredicate(value: true) }
-    func calendars(for entityType: EKEntityType) -> [EKCalendar] { [] }
+    func getCalendars(for entityType: EKEntityType) -> [EKCalendar] { [] }
 }
 
 #Preview {
