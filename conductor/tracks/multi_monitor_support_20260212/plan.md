@@ -23,6 +23,6 @@ Goal: Provide a user interface to select the desired display.
 Goal: Ensure the Timer Beam correctly identifies and moves to the selected display, and reacts to hardware changes.
 
 - [x] Task: Update `BeamWindow.update` and `FrameCalculator.calculateFrame` to explicitly use the `NSScreen` resolved from settings instead of defaulting to `.main`. cd4e1ca
-- [~] Task: In `AppDelegate`, subscribe to `NSApplication.didChangeScreenParametersNotification` to re-fetch events and reposition the beam if the monitor configuration changes.
-- [ ] Task: Verify that the beam falls back to the main display if the selected display is disconnected.
+- [x] Task: In `AppDelegate`, subscribe to `NSApplication.didChangeScreenParametersNotification` to re-fetch events and reposition the beam if the monitor configuration changes. 8d96c5f
+- [~] Task: Verify that the beam falls back to the main display if the selected display is disconnected.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Window Repositioning & Screen Lifecycle' (Protocol in workflow.md)
