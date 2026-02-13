@@ -69,6 +69,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
             .store(in: &cancellables)
+            
+        NotificationCenter.default.publisher(for: NSApplication.didChangeScreenParametersNotification)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                Task { @MainActor in
+                    self.beamWindow?.update(events: self.calendarManager.events, settings: self.settingsManager)
+                    self.calendarManager.fetchEvents(calendarIDs: self.settingsManager.selectedCalendarIDs)
+                }
+            }
+            .store(in: &cancellables)
     }
 
     func applicationWillTerminate(_ notification: Notification) {
