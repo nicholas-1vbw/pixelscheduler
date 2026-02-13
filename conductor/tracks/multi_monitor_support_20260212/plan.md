@@ -15,14 +15,14 @@ Goal: Update the settings infrastructure to support saving and resolving display
 Goal: Provide a user interface to select the desired display.
 
 - [x] Task: Update `SettingsViewModel` to publish a list of currently connected screen names. 4ca096c
-- [~] Task: Add a "Display" picker to `SettingsView` using the available screen names.
-- [ ] Task: Ensure the picker updates `SettingsManager` in real-time to trigger LivePreview repositioning.
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Settings UI Integration' (Protocol in workflow.md)
+- [x] Task: Add a "Display" picker to `SettingsView` using the available screen names. d94395f
+- [x] Task: Ensure the picker updates `SettingsManager` in real-time to trigger LivePreview repositioning. d94395f
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Settings UI Integration' (Protocol in workflow.md)
 
 ## Phase 3: Window Repositioning & Screen Lifecycle
 Goal: Ensure the Timer Beam correctly identifies and moves to the selected display, and reacts to hardware changes.
 
 - [x] Task: Update `BeamWindow.update` and `FrameCalculator.calculateFrame` to explicitly use the `NSScreen` resolved from settings instead of defaulting to `.main`. cd4e1ca
 - [x] Task: In `AppDelegate`, subscribe to `NSApplication.didChangeScreenParametersNotification` to re-fetch events and reposition the beam if the monitor configuration changes. 8d96c5f
-- [~] Task: Verify that the beam falls back to the main display if the selected display is disconnected.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Window Repositioning & Screen Lifecycle' (Protocol in workflow.md)
+- [x] Task: Verify that the beam falls back to the main display if the selected display is disconnected. 3eb506b
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Window Repositioning & Screen Lifecycle' (Protocol in workflow.md)
