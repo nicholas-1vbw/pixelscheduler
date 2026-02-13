@@ -89,4 +89,12 @@ class SettingsManager: ObservableObject {
         userDefaults.set(selectedDisplayName, forKey: Keys.selectedDisplayName)
         snapshot = nil
     }
+    
+    func resolveSelectedScreen() -> NSScreen? {
+        if selectedDisplayName.isEmpty {
+            return NSScreen.main
+        }
+        
+        return NSScreen.screens.first { $0.localizedName == selectedDisplayName } ?? NSScreen.main
+    }
 }
