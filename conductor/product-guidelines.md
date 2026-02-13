@@ -19,3 +19,4 @@
 ## Technical & Performance
 - **Efficiency:** Prioritize low energy impact. Calendar data fetching should be throttled (every 5-15 minutes), and the current time indicator should update no more than once per minute by default.
 - **Robustness:** Handle potential `EventKit` errors and edge cases (e.g., midnight transitions, system sleep/wake) reliably.
+- **Hardware Awareness:** Gracefully handle display configuration changes (resolution changes, monitor connections/disconnections) by repositioning the beam bar according to user preferences.
