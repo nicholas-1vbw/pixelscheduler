@@ -6,7 +6,7 @@ This plan outlines the steps to allow users to choose which display the Timer Be
 Goal: Update the settings infrastructure to support saving and resolving display selections.
 
 - [x] Task: Update `SettingsManager` to include `selectedDisplayName` (defaulting to empty). 70ca230
-    - [ ] Task: Implement `resolveSelectedScreen()` in `SettingsManager` (or a utility) that returns the `NSScreen` matching the saved name, falling back to `NSScreen.main`.
+    - [x] Task: Implement `resolveSelectedScreen()` in `SettingsManager` (or a utility) that returns the `NSScreen` matching the saved name, falling back to `NSScreen.main`. bee8829
 - [ ] Task: Update `SettingsManager.Snapshot` and session logic to include `selectedDisplayName`.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Data Model & Persistence' (Protocol in workflow.md)
 
