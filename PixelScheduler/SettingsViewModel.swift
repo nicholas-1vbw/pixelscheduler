@@ -25,14 +25,10 @@ class SettingsViewModel: ObservableObject {
     @Published var selectedCalendarIDs: Set<String> {
         didSet { settingsManager.selectedCalendarIDs = selectedCalendarIDs }
     }
-    @Published var selectedDisplayName: String {
-        didSet { settingsManager.selectedDisplayName = selectedDisplayName }
-    }
     @Published var launchAtLogin: Bool {
         didSet { settingsManager.launchAtLogin = launchAtLogin }
     }
     @Published var groupedCalendars: [CalendarGroup] = []
-    @Published var availableScreens: [String] = []
     var isSaved = false
     
     private let settingsManager: SettingsManager
@@ -48,27 +44,12 @@ class SettingsViewModel: ObservableObject {
         self.beamBaseColorHex = settingsManager.beamBaseColorHex
         self.indicatorColorHex = settingsManager.indicatorColorHex
         self.selectedCalendarIDs = settingsManager.selectedCalendarIDs
-        self.selectedDisplayName = settingsManager.selectedDisplayName
         self.launchAtLogin = settingsManager.launchAtLogin
         
         self.groupedCalendars = calendarManager.fetchGroupedCalendars()
-        self.updateAvailableScreens()
         
         // Start a session for LivePreview
         settingsManager.beginSession()
-        
-        // Observe screen changes
-        NotificationCenter.default.publisher(for: NSApplication.didChangeScreenParametersNotification)
-            .sink { [weak self] _ in
-                Task { @MainActor in
-                    self?.updateAvailableScreens()
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func updateAvailableScreens() {
-        availableScreens = NSScreen.screens.map { $0.localizedName }
     }
     
     func toggleCalendar(_ id: String) {
@@ -100,7 +81,6 @@ class SettingsViewModel: ObservableObject {
         settingsManager.beamBaseColorHex = beamBaseColorHex
         settingsManager.indicatorColorHex = indicatorColorHex
         settingsManager.selectedCalendarIDs = selectedCalendarIDs
-        settingsManager.selectedDisplayName = selectedDisplayName
         settingsManager.launchAtLogin = launchAtLogin
         
         // Persist to disk
@@ -117,7 +97,6 @@ class SettingsViewModel: ObservableObject {
         self.beamBaseColorHex = settingsManager.beamBaseColorHex
         self.indicatorColorHex = settingsManager.indicatorColorHex
         self.selectedCalendarIDs = settingsManager.selectedCalendarIDs
-        self.selectedDisplayName = settingsManager.selectedDisplayName
         self.launchAtLogin = settingsManager.launchAtLogin
     }
 }

@@ -13,14 +13,6 @@ struct SettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
-                Section(header: Text("Display")) {
-                    Picker("Target Display", selection: $viewModel.selectedDisplayName) {
-                        ForEach(viewModel.availableScreens, id: \.self) { name in
-                            Text(name).tag(name)
-                        }
-                    }
-                }
-                
                 Section(header: Text("Beam Appearance")) {
                     Picker("Position", selection: $viewModel.beamPosition) {
                         Text("Top").tag(BeamPosition.top)
