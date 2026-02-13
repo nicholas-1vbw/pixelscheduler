@@ -12,7 +12,7 @@
 - [x] Task: Verify that SwiftUI's native popover logic handles clamping or implement a custom positioning logic if native behavior is insufficient for "center-aligned clamping". 37029eb
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md) 37029eb
 
-## Phase 3: Regression Testing and Cleanup
+## Phase 3: Regression Testing and Cleanup [checkpoint: a0b8ab6]
 - [x] Task: Ensure Top/Bottom popover positioning remains correct (centered horizontally). 37029eb
 - [x] Task: Verify behavior near screen corners (Top-Left, Top-Right, etc.). 37029eb
 - [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md) 37029eb
