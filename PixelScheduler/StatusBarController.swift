@@ -8,6 +8,7 @@
 import AppKit
 import SwiftUI
 
+@MainActor
 class StatusBarController: NSObject {
     var statusItem: NSStatusItem!
     private let calendarManager: CalendarManager
