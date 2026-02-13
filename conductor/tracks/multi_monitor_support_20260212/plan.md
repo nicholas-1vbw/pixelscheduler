@@ -14,8 +14,8 @@ Goal: Update the settings infrastructure to support saving and resolving display
 ## Phase 2: Settings UI Integration
 Goal: Provide a user interface to select the desired display.
 
-- [ ] Task: Update `SettingsViewModel` to publish a list of currently connected screen names.
-- [ ] Task: Add a "Display" picker to `SettingsView` using the available screen names.
+- [x] Task: Update `SettingsViewModel` to publish a list of currently connected screen names. 4ca096c
+- [~] Task: Add a "Display" picker to `SettingsView` using the available screen names.
 - [ ] Task: Ensure the picker updates `SettingsManager` in real-time to trigger LivePreview repositioning.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Settings UI Integration' (Protocol in workflow.md)
 
