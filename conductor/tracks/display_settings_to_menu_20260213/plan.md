@@ -1,9 +1,9 @@
 # Implementation Plan: Display Settings to Menu Transition
 
-## Phase 1: Preparation and Testing
+## Phase 1: Preparation and Testing [checkpoint: f69b633]
 - [x] Task: Create unit tests for `StatusBarController` to verify dynamic menu generation. 675f5b0
 - [x] Task: Create unit tests for `SettingsManager` to ensure `selectedDisplayName` is correctly persisted and resolved when updated via non-UI paths. 6c085b9
-- [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md) f69b633
 
 ## Phase 2: Status Bar Menu Enhancement
 - [ ] Task: Update `StatusBarController` to include a "Display" submenu.
