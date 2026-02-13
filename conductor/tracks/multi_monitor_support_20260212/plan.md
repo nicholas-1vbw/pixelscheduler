@@ -7,7 +7,7 @@ Goal: Update the settings infrastructure to support saving and resolving display
 
 - [x] Task: Update `SettingsManager` to include `selectedDisplayName` (defaulting to empty). 70ca230
     - [x] Task: Implement `resolveSelectedScreen()` in `SettingsManager` (or a utility) that returns the `NSScreen` matching the saved name, falling back to `NSScreen.main`. bee8829
-- [ ] Task: Update `SettingsManager.Snapshot` and session logic to include `selectedDisplayName`.
+- [x] Task: Update `SettingsManager.Snapshot` and session logic to include `selectedDisplayName`. 2e3ca10
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Data Model & Persistence' (Protocol in workflow.md)
 
 ## Phase 2: Settings UI Integration
