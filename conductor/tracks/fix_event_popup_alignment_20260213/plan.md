@@ -2,7 +2,7 @@
 
 ## Phase 1: Infrastructure and Visual Verification Setup
 - [x] Task: Create a dedicated manual verification protocol to capture the "before" state of popover positioning on Left/Right beams. 18f1f74
-- [ ] Task: Review `TimelineEvent` and `EventSegmentView` to ensure coordinate calculations for vertical beams are robust.
+- [x] Task: Review `TimelineEvent` and `EventSegmentView` to ensure coordinate calculations for vertical beams are robust. f127d8c
 - [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
 ## Phase 2: Implement Vertical Centering and Alignment
