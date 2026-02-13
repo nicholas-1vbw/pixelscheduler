@@ -19,9 +19,9 @@
 - [x] Task: Verify that `SettingsViewModel` still correctly interacts with `SettingsManager` for other settings. 8039d0b
 - [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md) 533d161
 
-## Phase 4: Final Integration and Verification
-- [ ] Task: Verify the end-to-end flow:
-    - [ ] Connect/disconnect a display (if possible) and check menu updates.
-    - [ ] Switch display via menu and confirm Timer Beam moves.
-    - [ ] Restart app and confirm display selection persists.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4' (Protocol in workflow.md)
+## Phase 4: Final Integration and Verification [checkpoint: 2bbbbb7]
+- [x] Task: Verify the end-to-end flow: 2bbbbb7
+    - [x] Connect/disconnect a display (if possible) and check menu updates. 2bbbbb7
+    - [x] Switch display via menu and confirm Timer Beam moves. 2bbbbb7
+    - [x] Restart app and confirm display selection persists. 2bbbbb7
+- [x] Task: Conductor - User Manual Verification 'Phase 4' (Protocol in workflow.md) 2bbbbb7
