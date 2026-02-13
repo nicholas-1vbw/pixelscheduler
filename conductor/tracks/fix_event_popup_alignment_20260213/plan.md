@@ -5,7 +5,7 @@
 - [x] Task: Review `TimelineEvent` and `EventSegmentView` to ensure coordinate calculations for vertical beams are robust. f127d8c
 - [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
-## Phase 2: Implement Vertical Centering and Alignment
+## Phase 2: Implement Vertical Centering and Alignment [checkpoint: 5da97e8]
 - [x] Task: Update `EventSegmentView` to use `attachmentAnchor` and `arrowEdge` parameters in the `.popover` modifier. 37029eb
     - [x] For `left` position: Set `attachmentAnchor` to `.rect(.center)` and `arrowEdge` to `.trailing`.
     - [x] For `right` position: Set `attachmentAnchor` to `.rect(.center)` and `arrowEdge` to `.leading`.
