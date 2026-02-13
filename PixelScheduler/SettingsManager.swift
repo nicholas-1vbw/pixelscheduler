@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import ServiceManagement
 
 @MainActor
 class SettingsManager: ObservableObject {
@@ -29,7 +30,11 @@ class SettingsManager: ObservableObject {
     @Published var indicatorColorHex: String
     @Published var selectedCalendarIDs: Set<String>
     @Published var selectedDisplayName: String
-    @Published var launchAtLogin: Bool
+    @Published var launchAtLogin: Bool {
+        didSet {
+            syncLaunchAtLogin()
+        }
+    }
     
     private struct Snapshot {
         let beamPosition: BeamPosition
@@ -65,6 +70,33 @@ class SettingsManager: ObservableObject {
         
         self.selectedDisplayName = userDefaults.string(forKey: Keys.selectedDisplayName) ?? ""
         self.launchAtLogin = userDefaults.bool(forKey: Keys.launchAtLogin)
+        
+        // Initial sync
+        syncLaunchAtLogin()
+    }
+    
+    func syncLaunchAtLogin() {
+        let service = SMAppService.mainApp
+        if launchAtLogin {
+            if service.status != .enabled {
+                do {
+                    try service.register()
+                    print("Launch at Login registered successfully")
+                } catch {
+                    print("Failed to register Launch at Login: \(error)")
+                }
+            }
+        } else {
+            if service.status == .enabled {
+                service.unregister { error in
+                    if let error = error {
+                        print("Failed to unregister Launch at Login: \(error)")
+                    } else {
+                        print("Launch at Login unregistered successfully")
+                    }
+                }
+            }
+        }
     }
     
     func beginSession() {
