@@ -20,6 +20,7 @@ class SettingsManager: ObservableObject {
         static let indicatorColorHex = "indicatorColorHex"
         static let selectedCalendarIDs = "selectedCalendarIDs"
         static let selectedDisplayName = "selectedDisplayName"
+        static let launchAtLogin = "launchAtLogin"
     }
     
     @Published var beamPosition: BeamPosition
@@ -28,6 +29,7 @@ class SettingsManager: ObservableObject {
     @Published var indicatorColorHex: String
     @Published var selectedCalendarIDs: Set<String>
     @Published var selectedDisplayName: String
+    @Published var launchAtLogin: Bool
     
     private struct Snapshot {
         let beamPosition: BeamPosition
@@ -36,12 +38,18 @@ class SettingsManager: ObservableObject {
         let indicatorColorHex: String
         let selectedCalendarIDs: Set<String>
         let selectedDisplayName: String
+        let launchAtLogin: Bool
     }
     
     private var snapshot: Snapshot?
     
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
+        
+        // Register defaults
+        userDefaults.register(defaults: [
+            Keys.launchAtLogin: true
+        ])
         
         // Load values or use defaults
         self.beamPosition = BeamPosition(rawValue: userDefaults.string(forKey: Keys.beamPosition) ?? "") ?? .top
@@ -56,6 +64,7 @@ class SettingsManager: ObservableObject {
         self.selectedCalendarIDs = Set(savedIDs)
         
         self.selectedDisplayName = userDefaults.string(forKey: Keys.selectedDisplayName) ?? ""
+        self.launchAtLogin = userDefaults.bool(forKey: Keys.launchAtLogin)
     }
     
     func beginSession() {
@@ -65,7 +74,8 @@ class SettingsManager: ObservableObject {
             beamBaseColorHex: beamBaseColorHex,
             indicatorColorHex: indicatorColorHex,
             selectedCalendarIDs: selectedCalendarIDs,
-            selectedDisplayName: selectedDisplayName
+            selectedDisplayName: selectedDisplayName,
+            launchAtLogin: launchAtLogin
         )
     }
     
@@ -77,6 +87,7 @@ class SettingsManager: ObservableObject {
         indicatorColorHex = snapshot.indicatorColorHex
         selectedCalendarIDs = snapshot.selectedCalendarIDs
         selectedDisplayName = snapshot.selectedDisplayName
+        launchAtLogin = snapshot.launchAtLogin
         self.snapshot = nil
     }
     
@@ -87,6 +98,7 @@ class SettingsManager: ObservableObject {
         userDefaults.set(indicatorColorHex, forKey: Keys.indicatorColorHex)
         userDefaults.set(Array(selectedCalendarIDs), forKey: Keys.selectedCalendarIDs)
         userDefaults.set(selectedDisplayName, forKey: Keys.selectedDisplayName)
+        userDefaults.set(launchAtLogin, forKey: Keys.launchAtLogin)
         snapshot = nil
     }
     

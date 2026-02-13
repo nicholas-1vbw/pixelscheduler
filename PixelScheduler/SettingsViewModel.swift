@@ -28,6 +28,9 @@ class SettingsViewModel: ObservableObject {
     @Published var selectedDisplayName: String {
         didSet { settingsManager.selectedDisplayName = selectedDisplayName }
     }
+    @Published var launchAtLogin: Bool {
+        didSet { settingsManager.launchAtLogin = launchAtLogin }
+    }
     @Published var groupedCalendars: [CalendarGroup] = []
     @Published var availableScreens: [String] = []
     var isSaved = false
@@ -46,6 +49,7 @@ class SettingsViewModel: ObservableObject {
         self.indicatorColorHex = settingsManager.indicatorColorHex
         self.selectedCalendarIDs = settingsManager.selectedCalendarIDs
         self.selectedDisplayName = settingsManager.selectedDisplayName
+        self.launchAtLogin = settingsManager.launchAtLogin
         
         self.groupedCalendars = calendarManager.fetchGroupedCalendars()
         self.updateAvailableScreens()
@@ -97,6 +101,7 @@ class SettingsViewModel: ObservableObject {
         settingsManager.indicatorColorHex = indicatorColorHex
         settingsManager.selectedCalendarIDs = selectedCalendarIDs
         settingsManager.selectedDisplayName = selectedDisplayName
+        settingsManager.launchAtLogin = launchAtLogin
         
         // Persist to disk
         settingsManager.save()
@@ -113,5 +118,6 @@ class SettingsViewModel: ObservableObject {
         self.indicatorColorHex = settingsManager.indicatorColorHex
         self.selectedCalendarIDs = settingsManager.selectedCalendarIDs
         self.selectedDisplayName = settingsManager.selectedDisplayName
+        self.launchAtLogin = settingsManager.launchAtLogin
     }
 }
