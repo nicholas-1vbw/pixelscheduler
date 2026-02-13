@@ -92,13 +92,22 @@ struct EventSegmentView: View {
             .popover(item: Binding(
                 get: { hoveredEvent?.id == event.id ? event : nil },
                 set: { if $0 == nil && hoveredEvent?.id == event.id { hoveredEvent = nil } }
-            )) { event in
+            ), attachmentAnchor: .rect(.bounds), arrowEdge: popoverArrowEdge) { event in
                 EventPopoverView(event: event)
             }
             .position(
                 x: isVertical ? containerSize.width / 2 : containerSize.width * (event.startOffset + event.durationWidth / 2),
                 y: isVertical ? containerSize.height * (event.startOffset + event.durationWidth / 2) : containerSize.height / 2
             )
+    }
+    
+    private var popoverArrowEdge: Edge {
+        switch position {
+        case .top: return .bottom
+        case .bottom: return .top
+        case .left: return .trailing
+        case .right: return .leading
+        }
     }
 }
 
