@@ -41,6 +41,12 @@ class StatusBarController: NSObject {
         
         menu.addItem(NSMenuItem.separator())
         
+        let displayItem = NSMenuItem(title: "Display", action: nil, keyEquivalent: "")
+        displayItem.submenu = NSMenu()
+        menu.addItem(displayItem)
+        
+        menu.addItem(NSMenuItem.separator())
+        
         let exitItem = NSMenuItem(title: "Exit", action: #selector(exitApp), keyEquivalent: "q")
         exitItem.target = self
         menu.addItem(exitItem)
@@ -49,6 +55,41 @@ class StatusBarController: NSObject {
         
         if let button = statusItem.button {
             button.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "PixelScheduler")
+        }
+        
+        updateDisplayMenu()
+    }
+    
+    private func updateDisplayMenu() {
+        guard let displayItem = statusItem.menu?.items.first(where: { $0.title == "Display" }),
+              let submenu = displayItem.submenu else { return }
+        
+        submenu.removeAllItems()
+        
+        let screens = NSScreen.screens
+        for screen in screens {
+            let item = NSMenuItem(title: screen.localizedName, action: #selector(switchDisplay(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = screen
+            item.state = (screen.localizedName == settingsManager.selectedDisplayName) ? .on : .off
+            submenu.addItem(item)
+        }
+        
+        // If nothing is selected, check the main screen
+        if !submenu.items.contains(where: { $0.state == .on }), let mainScreen = NSScreen.main {
+            if let item = submenu.items.first(where: { $0.title == mainScreen.localizedName }) {
+                item.state = .on
+            }
+        }
+    }
+    
+    @objc func switchDisplay(_ sender: NSMenuItem) {
+        if let screen = sender.representedObject as? NSScreen {
+            settingsManager.selectedDisplayName = screen.localizedName
+            settingsManager.save()
+            updateDisplayMenu()
+            // The BeamWindow should observe settingsManager and move itself.
+            // In PixelSchedulerApp.swift, it might need to react to this change.
         }
     }
     
@@ -106,6 +147,7 @@ extension StatusBarController: NSMenuDelegate {
         if let launchItem = menu.items.first(where: { $0.title == "Launch at Login" }) {
             launchItem.state = settingsManager.launchAtLogin ? .on : .off
         }
+        updateDisplayMenu()
     }
 }
 
