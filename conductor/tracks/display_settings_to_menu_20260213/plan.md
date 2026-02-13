@@ -13,11 +13,11 @@
 - [x] Task: Write tests to verify that selecting a display in the menu updates `SettingsManager.selectedDisplayName`. 7d880ca
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md) 4e0322e
 
-## Phase 3: Settings UI Cleanup [checkpoint: 8039d0b]
+## Phase 3: Settings UI Cleanup [checkpoint: 533d161]
 - [x] Task: Remove the "Display" section from `SettingsView.swift`. 8039d0b
 - [x] Task: Update `SettingsViewModel.swift` to remove `availableScreens` and `selectedDisplayName` if they are no longer needed by the view. 8039d0b
 - [x] Task: Verify that `SettingsViewModel` still correctly interacts with `SettingsManager` for other settings. 8039d0b
-- [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md) 8039d0b
+- [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md) 533d161
 
 ## Phase 4: Final Integration and Verification
 - [ ] Task: Verify the end-to-end flow:
