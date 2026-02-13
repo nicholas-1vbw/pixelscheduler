@@ -25,6 +25,7 @@ class StatusBarController: NSObject {
     
     private func setupMenu() {
         let menu = NSMenu()
+        menu.delegate = self
         
         let settingsItem = NSMenuItem(title: "Settings...", action: #selector(openSettings), keyEquivalent: ",")
         settingsItem.target = self
@@ -33,6 +34,10 @@ class StatusBarController: NSObject {
         let refreshItem = NSMenuItem(title: "Update Now", action: #selector(refresh), keyEquivalent: "r")
         refreshItem.target = self
         menu.addItem(refreshItem)
+        
+        let launchAtLoginItem = NSMenuItem(title: "Launch at Login", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
+        launchAtLoginItem.target = self
+        menu.addItem(launchAtLoginItem)
         
         menu.addItem(NSMenuItem.separator())
         
@@ -88,6 +93,19 @@ class StatusBarController: NSObject {
     
     @objc func exitApp() {
         NSApplication.shared.terminate(nil)
+    }
+    
+    @objc func toggleLaunchAtLogin() {
+        settingsManager.launchAtLogin.toggle()
+        settingsManager.save()
+    }
+}
+
+extension StatusBarController: NSMenuDelegate {
+    func menuWillOpen(_ menu: NSMenu) {
+        if let launchItem = menu.items.first(where: { $0.title == "Launch at Login" }) {
+            launchItem.state = settingsManager.launchAtLogin ? .on : .off
+        }
     }
 }
 
