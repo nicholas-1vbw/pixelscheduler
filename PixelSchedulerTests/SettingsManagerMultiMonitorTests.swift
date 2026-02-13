@@ -52,4 +52,16 @@ struct SettingsManagerMultiMonitorTests {
             #expect(resolvedScreen?.localizedName == firstScreen.localizedName)
         }
     }
+
+    @Test func testSessionRevertForSelectedDisplayName() {
+        let manager = SettingsManager(userDefaults: UserDefaults(suiteName: "TestSessionRevert")!)
+        manager.selectedDisplayName = "Initial Display"
+        
+        manager.beginSession()
+        manager.selectedDisplayName = "Changed Display"
+        #expect(manager.selectedDisplayName == "Changed Display")
+        
+        manager.revertSession()
+        #expect(manager.selectedDisplayName == "Initial Display")
+    }
 }
