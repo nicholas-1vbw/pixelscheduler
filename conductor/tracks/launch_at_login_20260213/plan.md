@@ -20,12 +20,12 @@
     - [ ] Mock or verify (where possible) the interaction with `SMAppService`.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: System Integration (SMAppService)' (Protocol in workflow.md) 6776e34
 
-## Phase 3: UI Implementation
-- [ ] Task: **Update `StatusBarController` to include the toggle**
+## Phase 3: UI Implementation [checkpoint: 9821f08]
+- [x] Task: **Update `StatusBarController` to include the toggle** 3ad6112
     - [ ] Add the "Launch at Login" `NSMenuItem` in `setupMenu` between "Update Now" and the separator.
     - [ ] Implement the `@objc` action to toggle the setting via `SettingsManager`.
     - [ ] Ensure the menu item's checkmark state stays in sync with the `SettingsManager` value.
-- [ ] Task: **Verify end-to-end functionality**
+- [x] Task: **Verify end-to-end functionality** 3ad6112
     - [ ] Manually verify the menu item exists and toggles correctly.
     - [ ] Verify the checkmark state persists after restarting the app.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: UI Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: UI Implementation' (Protocol in workflow.md) 9821f08
