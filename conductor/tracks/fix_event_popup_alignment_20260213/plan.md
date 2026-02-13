@@ -13,6 +13,6 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md) 37029eb
 
 ## Phase 3: Regression Testing and Cleanup
-- [ ] Task: Ensure Top/Bottom popover positioning remains correct (centered horizontally).
-- [ ] Task: Verify behavior near screen corners (Top-Left, Top-Right, etc.).
-- [ ] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
+- [x] Task: Ensure Top/Bottom popover positioning remains correct (centered horizontally). 37029eb
+- [x] Task: Verify behavior near screen corners (Top-Left, Top-Right, etc.). 37029eb
+- [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md) 37029eb
