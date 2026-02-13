@@ -5,13 +5,13 @@
 - [x] Task: Create unit tests for `SettingsManager` to ensure `selectedDisplayName` is correctly persisted and resolved when updated via non-UI paths. 6c085b9
 - [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md) f69b633
 
-## Phase 2: Status Bar Menu Enhancement
+## Phase 2: Status Bar Menu Enhancement [checkpoint: 4e0322e]
 - [x] Task: Update `StatusBarController` to include a "Display" submenu. 675f5b0
     - [x] Add a method to build the Display submenu dynamically based on `NSScreen.screens`. 675f5b0
     - [x] Implement a menu action to switch the active display and update `SettingsManager`. 675f5b0
     - [x] Add logic to refresh the submenu when it's about to open (to handle display connection/disconnection). 675f5b0
 - [x] Task: Write tests to verify that selecting a display in the menu updates `SettingsManager.selectedDisplayName`. 7d880ca
-- [ ] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md) 4e0322e
 
 ## Phase 3: Settings UI Cleanup
 - [ ] Task: Remove the "Display" section from `SettingsView.swift`.
