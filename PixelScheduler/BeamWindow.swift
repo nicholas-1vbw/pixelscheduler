@@ -34,8 +34,8 @@ class BeamWindow: NSPanel {
         hostingView.frame = self.contentView?.bounds ?? .zero
         self.contentView = hostingView
         
-        if let mainScreen = NSScreen.main {
-            let frame = FrameCalculator.calculateFrame(for: settings.beamPosition, thickness: CGFloat(settings.beamThickness), screen: mainScreen)
+        if let targetScreen = settings.resolveSelectedScreen() {
+            let frame = FrameCalculator.calculateFrame(for: settings.beamPosition, thickness: CGFloat(settings.beamThickness), screen: targetScreen)
             self.setFrame(frame, display: true)
         }
     }
