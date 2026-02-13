@@ -1,0 +1,8 @@
+{
+  "track_id": "fix_event_popup_alignment_20260213",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-02-13T12:00:00Z",
+  "updated_at": "2026-02-13T12:00:00Z",
+  "description": "修复当位置为left/right时，event popup的位置"
+}
