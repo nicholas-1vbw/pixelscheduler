@@ -2,7 +2,7 @@
 
 ## Phase 1: Preparation and Testing
 - [x] Task: Create unit tests for `StatusBarController` to verify dynamic menu generation. 675f5b0
-- [ ] Task: Create unit tests for `SettingsManager` to ensure `selectedDisplayName` is correctly persisted and resolved when updated via non-UI paths.
+- [x] Task: Create unit tests for `SettingsManager` to ensure `selectedDisplayName` is correctly persisted and resolved when updated via non-UI paths. 6c085b9
 - [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
 ## Phase 2: Status Bar Menu Enhancement
