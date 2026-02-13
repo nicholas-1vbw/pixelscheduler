@@ -4,7 +4,7 @@ PixelScheduler is a minimalist macOS status bar utility that provides an ambient
 
 This project is a **Swift rewrite** of the original [PixelScheduler](https://github.com/masayoshimatsuo/pixelscheduler), rebuilt from the ground up for modern macOS using Swift 6 and SwiftUI for better performance and native integration.
 
-![PixelScheduler Icon](PixelScheduler/Assets.xcassets/AppIcon.appiconset/Contents.json) *(Icon placeholder)*
+![PixelScheduler Icon](PixelScheduler/Assets.xcassets/AppIcon.appiconset/icon_128x128@2x.png)
 
 ## Features
 
@@ -84,4 +84,4 @@ PixelScheduler uses GitHub Actions to automatically build and release new versio
 
 ## License
 
-[Insert License Information Here]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
