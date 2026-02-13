@@ -12,13 +12,13 @@
     - [ ] Verify value persists and reverts correctly in a session.
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation and Persistence' (Protocol in workflow.md) eef732d
 
-## Phase 2: System Integration (SMAppService)
-- [ ] Task: **Implement login launch registration logic**
+## Phase 2: System Integration (SMAppService) [checkpoint: 6776e34]
+- [x] Task: **Implement login launch registration logic** 2b7371d
     - [ ] Create a helper method in `SettingsManager` (or a dedicated service) that uses `SMAppService.mainApp` to register or unregister based on the `launchAtLogin` state.
     - [ ] Ensure this logic is called whenever `launchAtLogin` is updated and at app startup to sync the system state with the setting.
-- [ ] Task: **Write Unit Tests for registration logic**
+- [x] Task: **Write Unit Tests for registration logic** 2b7371d
     - [ ] Mock or verify (where possible) the interaction with `SMAppService`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: System Integration (SMAppService)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: System Integration (SMAppService)' (Protocol in workflow.md) 6776e34
 
 ## Phase 3: UI Implementation
 - [ ] Task: **Update `StatusBarController` to include the toggle**
