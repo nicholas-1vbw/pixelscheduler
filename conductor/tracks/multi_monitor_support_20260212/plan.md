@@ -2,13 +2,14 @@
 
 This plan outlines the steps to allow users to choose which display the Timer Beam should be rendered on, with automatic fallback and real-time updates.
 
-## Phase 1: Data Model & Persistence
+## Phase 1: Data Model & Persistence [checkpoint: 170458d]
+
 Goal: Update the settings infrastructure to support saving and resolving display selections.
 
 - [x] Task: Update `SettingsManager` to include `selectedDisplayName` (defaulting to empty). 70ca230
     - [x] Task: Implement `resolveSelectedScreen()` in `SettingsManager` (or a utility) that returns the `NSScreen` matching the saved name, falling back to `NSScreen.main`. bee8829
 - [x] Task: Update `SettingsManager.Snapshot` and session logic to include `selectedDisplayName`. 2e3ca10
-- [~] Task: Conductor - User Manual Verification 'Phase 1: Data Model & Persistence' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Data Model & Persistence' (Protocol in workflow.md) 170458d
 
 ## Phase 2: Settings UI Integration
 Goal: Provide a user interface to select the desired display.
