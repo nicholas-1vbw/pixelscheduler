@@ -1,13 +1,13 @@
 # Implementation Plan: Launch at Login Support
 
 ## Phase 1: Foundation and Persistence
-- [ ] Task: **Add `launchAtLogin` key and property to `SettingsManager`**
+- [x] Task: **Add `launchAtLogin` key and property to `SettingsManager`** e0f119c
     - [ ] Define `Keys.launchAtLogin = "launchAtLogin"` in `SettingsManager.swift`.
     - [ ] Add a `@Published var launchAtLogin: Bool` property.
     - [ ] Implement `registerDefaults` in `SettingsManager` to set `launchAtLogin` to `true`.
     - [ ] Update `init` to load the value from `UserDefaults`.
     - [ ] Update `save`, `beginSession`, and `revertSession` to include `launchAtLogin`.
-- [ ] Task: **Write Unit Tests for `SettingsManager` login launch logic**
+- [x] Task: **Write Unit Tests for `SettingsManager` login launch logic** e0f119c
     - [ ] Verify default value is `true`.
     - [ ] Verify value persists and reverts correctly in a session.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation and Persistence' (Protocol in workflow.md)
