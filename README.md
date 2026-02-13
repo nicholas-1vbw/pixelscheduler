@@ -2,6 +2,8 @@
 
 PixelScheduler is a minimalist macOS status bar utility that provides an ambient, persistent visual "Timer Beam" at the edge of your screen. It represents your calendar events throughout the day, helping you stay aware of your schedule without the distraction of traditional calendar apps.
 
+This project is a **Swift rewrite** of the original [PixelScheduler](https://github.com/masayoshimatsuo/pixelscheduler), rebuilt from the ground up for modern macOS using Swift 6 and SwiftUI for better performance and native integration.
+
 ![PixelScheduler Icon](PixelScheduler/Assets.xcassets/AppIcon.appiconset/Contents.json) *(Icon placeholder)*
 
 ## Features
