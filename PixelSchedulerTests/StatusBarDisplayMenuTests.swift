@@ -38,4 +38,23 @@ struct StatusBarDisplayMenuTests {
             #expect(item != nil, "Submenu should have an item for screen: \(screen.localizedName)")
         }
     }
+
+    @Test func testSwitchDisplayUpdatesSettings() async throws {
+        let manager = CalendarManager()
+        let settings = SettingsManager(userDefaults: UserDefaults(suiteName: "TestSwitchDisplay")!)
+        let controller = StatusBarController(calendarManager: manager, settingsManager: settings)
+        
+        let menu = try #require(controller.statusItem.menu)
+        let displayItem = try #require(menu.items.first { $0.title == "Display" })
+        let submenu = try #require(displayItem.submenu)
+        
+        let firstItem = try #require(submenu.items.first)
+        let screen = try #require(firstItem.representedObject as? NSScreen)
+        
+        // Manually trigger the action
+        controller.switchDisplay(firstItem)
+        
+        #expect(settings.selectedDisplayName == screen.localizedName)
+        #expect(firstItem.state == .on)
+    }
 }
