@@ -16,3 +16,8 @@
 - **Concurrency:** Extensive use of Swift Concurrency (`async/await`, `MainActor`) to ensure data fetching doesn't block the UI.
 - **Session-based State Management:** Decoupled transient "session" state from persistent storage to support real-time preview and transactional updates (Save/Cancel).
 - **Visual Rendering:** Combination of SwiftUI `Canvas` or custom `NSView` drawing for the high-performance, transparent "Timer Beam."
+
+## CI/CD & DevOps
+- **GitHub Actions:** Automated build and release pipeline triggered by version tags.
+- **xcodebuild:** Command-line tool for building the Xcode project in a headless environment.
+- **hdiutil & zip:** Standard macOS and Unix utilities for packaging artifacts (.dmg and .zip).
