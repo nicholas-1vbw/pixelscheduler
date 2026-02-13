@@ -6,10 +6,10 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md) f69b633
 
 ## Phase 2: Status Bar Menu Enhancement
-- [ ] Task: Update `StatusBarController` to include a "Display" submenu.
-    - [ ] Add a method to build the Display submenu dynamically based on `NSScreen.screens`.
-    - [ ] Implement a menu action to switch the active display and update `SettingsManager`.
-    - [ ] Add logic to refresh the submenu when it's about to open (to handle display connection/disconnection).
+- [x] Task: Update `StatusBarController` to include a "Display" submenu. 675f5b0
+    - [x] Add a method to build the Display submenu dynamically based on `NSScreen.screens`. 675f5b0
+    - [x] Implement a menu action to switch the active display and update `SettingsManager`. 675f5b0
+    - [x] Add logic to refresh the submenu when it's about to open (to handle display connection/disconnection). 675f5b0
 - [ ] Task: Write tests to verify that selecting a display in the menu updates `SettingsManager.selectedDisplayName`.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
