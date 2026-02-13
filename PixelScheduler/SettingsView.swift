@@ -15,7 +15,6 @@ struct SettingsView: View {
             Form {
                 Section(header: Text("Beam Appearance")) {
                     Picker("Position", selection: $viewModel.beamPosition) {
-                        Text("Top").tag(BeamPosition.top)
                         Text("Bottom").tag(BeamPosition.bottom)
                         Text("Left").tag(BeamPosition.left)
                         Text("Right").tag(BeamPosition.right)
