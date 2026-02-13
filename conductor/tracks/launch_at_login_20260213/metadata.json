@@ -1,8 +1,0 @@
-{
-  "track_id": "launch_at_login_20260213",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-02-13T10:00:00Z",
-  "updated_at": "2026-02-13T10:00:00Z",
-  "description": "添加开机自动启动的选项，并默认开启，在menu中提供勾选选项"
-}

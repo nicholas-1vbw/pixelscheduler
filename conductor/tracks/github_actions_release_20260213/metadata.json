@@ -1,8 +1,0 @@
-{
-  "track_id": "github_actions_release_20260213",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-02-13T10:00:00Z",
-  "updated_at": "2026-02-13T10:00:00Z",
-  "description": "github构建脚本，用于自动发布app"
-}

@@ -1,8 +1,0 @@
-{
-  "track_id": "multi_monitor_support_20260212",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-02-12T16:15:00Z",
-  "updated_at": "2026-02-12T16:15:00Z",
-  "description": "multi monitor support，允许在不同的显示器上显示，按需选择可以选择在任意显示器上显示"
-}
