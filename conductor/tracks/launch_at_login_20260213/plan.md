@@ -1,6 +1,6 @@
 # Implementation Plan: Launch at Login Support
 
-## Phase 1: Foundation and Persistence
+## Phase 1: Foundation and Persistence [checkpoint: eef732d]
 - [x] Task: **Add `launchAtLogin` key and property to `SettingsManager`** e0f119c
     - [ ] Define `Keys.launchAtLogin = "launchAtLogin"` in `SettingsManager.swift`.
     - [ ] Add a `@Published var launchAtLogin: Bool` property.
@@ -10,7 +10,7 @@
 - [x] Task: **Write Unit Tests for `SettingsManager` login launch logic** e0f119c
     - [ ] Verify default value is `true`.
     - [ ] Verify value persists and reverts correctly in a session.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation and Persistence' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation and Persistence' (Protocol in workflow.md) eef732d
 
 ## Phase 2: System Integration (SMAppService)
 - [ ] Task: **Implement login launch registration logic**
