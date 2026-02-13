@@ -71,6 +71,15 @@ To build the project locally:
 2.  Open `PixelScheduler.xcodeproj` in Xcode 15 or later.
 3.  Build and run the `PixelScheduler` scheme.
 
+### Releasing a New Version
+
+PixelScheduler uses GitHub Actions to automatically build and release new versions. To create a new release:
+
+1.  Ensure all changes are committed and pushed to the `main` branch.
+2.  Create a new tag locally: `git tag v1.0.0` (replace with the actual version).
+3.  Push the tag to GitHub: `git push origin v1.0.0`.
+4.  The GitHub Action will trigger, build the app, and create a new GitHub Release with `.dmg` and `.zip` artifacts.
+
 ## License
 
 [Insert License Information Here]
